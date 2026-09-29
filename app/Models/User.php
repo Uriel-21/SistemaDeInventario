@@ -31,6 +31,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'telefono',
     ];
 
     /**
@@ -65,5 +66,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    // Funcion para obtener usuarios por algun dato
+    public function scopePorDato($query, $dato)
+    {
+        return $query -> where (function ($q) use ($dato) {
+            $q -> where ('name', 'LIKE', "%$dato%")
+                -> orWhere('email', 'LIKE', "%$dato%")
+                -> orWhere('telefono', 'LIKE', "%$dato%");
+        });
+    }
+
+    // Funcion para obtener usuarios si estan activos
+    public function scopeUsuariosActivos($query)
+    {
+        return $query->where('isActive', true);
     }
 }
