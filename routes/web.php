@@ -21,3 +21,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
 });
+
+
+// Ruta para modificar el usuario
+Route::get('/usuarios/{id}/edit', ModificarusuariosAdmin::class) -> name ('EditarUsuario');
