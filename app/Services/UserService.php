@@ -4,7 +4,10 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Exception;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UserService
 {
@@ -27,7 +30,7 @@ class UserService
                 $usuario = User::create([
                     'name' => $datos['name'],
                     'email' => $datos['email'],
-                    'password' => $datos['password'],
+                    'password' => Hash::make($datos['password']),
                     'telefono' => $datos['telefono']
             ]);
             return $usuario;
@@ -38,12 +41,16 @@ class UserService
         }
     }
 
+    // Funcion que devuelve un arreglo para la edicion de usuarios
+    public function obtenerDatos(int $id) : array
+    {
+        return $this -> obtenerUsuarioPorId($id) -> only(['id', 'name', 'email', 'telefono']);
+    }
     // Funcion para modificar los registros de los usuarios
     public function modificarUsuario(int $id, array $newData)
     {
+        $usuario = User::findOrFail($id);
         try {
-
-            $usuario = User::findOrFail($id);
 
             $dataUpdate = [
                 'name' => $newData['name'] ?? $usuario -> name,
@@ -52,7 +59,7 @@ class UserService
             ];
 
             if (!empty($newData['password'])) {
-                $dataUpdate['password'] = $newData = ['password'];
+                $dataUpdate['password'] = Hash::make($newData['password']);
             }
 
             $usuario -> update($dataUpdate);
@@ -83,5 +90,17 @@ class UserService
 
             throw $e;
         }
+    }
+
+    // Función para generar un password aleatorio
+    public function generarPassword()
+    {
+        return Str::random(8);
+    }
+
+    // Funcion para obtener el usuario por medio del ID
+    public function obtenerUsuarioPorId(int $id)
+    {
+        return User::findOrFail($id);
     }
 }

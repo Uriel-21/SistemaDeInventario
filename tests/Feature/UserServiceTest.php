@@ -141,4 +141,53 @@ class UserServiceTest extends TestCase
 
         $this -> assertEquals($usuario -> id, $resultados -> first() -> id);
     }
+
+    public function testParaObtenerDatos()
+    {
+        $usuario = User::factory() -> create([
+            'name' => 'Usuario Nuevo',
+            'email' => 'usuario@gmail.com',
+            'telefono' => '1234567890',
+            'password' => 'password1234'
+        ]);
+
+        $servicio = new UserService();
+
+        $resultado = $servicio -> obtenerDatos($usuario -> id);
+
+        $esperado = [
+            'id' => $usuario -> id,
+            'name' => 'Usuario Nuevo',
+            'email' => 'usuario@gmail.com',
+            'telefono' => '1234567890'
+        ];
+
+        $this -> assertEquals($esperado, $resultado);
+        $this -> assertArrayNotHasKey('password', $resultado);
+    }
+
+    public function testParaGenerarPassword()
+    {
+        $servicio = new UserService();
+
+        $password = $servicio -> generarPassword();
+        $password2 = $servicio -> generarPassword();
+
+        $this -> assertIsString($password);
+        $this -> assertEquals(8, strlen($password));
+
+        $this -> assertNotEquals($password, $password2);
+    }
+
+    public function testParaObtenerUsuarioPorId()
+    {
+        $usuario = User::factory() -> create();
+        $servicio = new UserService();
+
+        $resultado = $servicio -> obtenerUsuarioPorId($usuario -> id);
+
+        $this -> assertInstanceOf(User::class, $resultado);
+        $this -> assertEquals($usuario -> id, $resultado -> id );
+        $this -> assertEquals($usuario -> email, $resultado -> email);
+    }
 }

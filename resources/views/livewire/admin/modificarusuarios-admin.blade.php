@@ -13,65 +13,70 @@
 
     <!-- Contenido Principal -->
     <main class="mx-3 my-5 sm:mx-6 sm:my-8 md:mx-10 lg:mx-12">
-        <form class="mx-auto max-w-4xl space-y-6">
+        <form wire:submit="save" class="mx-auto max-w-4xl space-y-6">
 
-            <!-- Card / Contenedor con borde del formulario de edición -->
             <div class="rounded-3xl border border-slate-400 bg-white p-6 sm:p-10 shadow-sm">
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 
                     <!-- Nombre (s) -->
                     <div class="space-y-1.5">
-                        <label for="nombre" class="block text-sm font-bold text-slate-800">
-                            Nombre (s):
-                        </label>
-                        <input type="text" id="nombre" placeholder="José Jesús"
+                        <label for="nombre" class="block text-sm font-bold text-slate-800">Nombre (s):</label>
+                        <input type="text" id="nombre" wire:model="form.first_name" placeholder="José Jesús"
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.first_name')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Apellidos -->
                     <div class="space-y-1.5">
-                        <label for="apellidos" class="block text-sm font-bold text-slate-800">
-                            Apellidos:
-                        </label>
-                        <input type="text" id="apellidos" placeholder="Gómez Pérez"
+                        <label for="apellidos" class="block text-sm font-bold text-slate-800">Apellidos:</label>
+                        <input type="text" id="apellidos" wire:model="form.last_name" placeholder="Gómez Pérez"
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.last_name')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Número celular -->
                     <div class="space-y-1.5">
-                        <label for="celular" class="block text-sm font-bold text-slate-800">
-                            Numero celular:
-                        </label>
-                        <input type="text" id="celular" placeholder="4741469315"
+                        <label for="celular" class="block text-sm font-bold text-slate-800">Numero celular:</label>
+                        <input type="text" id="celular" wire:model="form.telefono" placeholder="4741469315"
+                            maxlength="10" inputmode="numeric"
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.telefono')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Correo electrónico -->
                     <div class="space-y-1.5">
-                        <label for="email" class="block text-sm font-bold text-slate-800">
-                            Correo electrónico:
-                        </label>
-                        <input type="email" id="email" placeholder="ejemplo@gmail.com"
+                        <label for="email" class="block text-sm font-bold text-slate-800">Correo electrónico:</label>
+                        <input type="email" id="email" wire:model="form.email" placeholder="ejemplo@gmail.com"
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.email')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
-                    <!-- Contraseña -->
+                    <!-- Contraseña (opcional al editar) -->
                     <div class="space-y-1.5">
-                        <label for="password" class="block text-sm font-bold text-slate-800">
-                            Contraseña:
-                        </label>
-                        <input type="password" id="password" placeholder="•••••"
+                        <label for="password" class="block text-sm font-bold text-slate-800">Contraseña:</label>
+                        <input type="password" id="password" wire:model="form.password"
+                            placeholder="Dejar vacío para no cambiarla"
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.password')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Rol -->
                     <div class="space-y-1.5">
-                        <label for="rol" class="block text-sm font-bold text-slate-800">
-                            Rol:
-                        </label>
+                        <label for="rol" class="block text-sm font-bold text-slate-800">Rol:</label>
                         <div class="relative">
                             <select id="rol"
                                 class="w-full appearance-none rounded-2xl border border-slate-400 bg-white px-4 py-2 pr-10 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                                <option value="">Selecciona un rol</option>
                                 <option value="Cortador">Cortador</option>
                                 <option value="Administrador">Administrador</option>
                                 <option value="Almacenista">Almacenista</option>
@@ -89,7 +94,6 @@
                 </div>
             </div>
 
-            <!-- Botones de Acción (Abajo a la Derecha) -->
             <div class="flex items-center justify-end gap-4 pt-2">
                 <button type="submit"
                     class="rounded-xl border border-amber-900 bg-[#FFD600] px-8 py-2.5 text-sm font-bold text-slate-950 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] hover:bg-amber-400 transition-all active:translate-y-0.5">
