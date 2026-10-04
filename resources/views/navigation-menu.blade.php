@@ -15,20 +15,39 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('usuarios') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Usuarios') }}
+                    <x-nav-link href="{{ route('vistadevolucionprima') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('VistaDevolucionPrima') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('crearusuarios') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('CrearUsuarios') }}
+                    <x-nav-link href="{{ route('vistaajusteinventario') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('VistaAjusteInventario') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('modificarusuarios') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('ModificarUsuarios') }}
+                    <x-nav-link href="{{ route('entradaprima') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('EntradaPrima') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('devolucionprima') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('DevolucionPrima') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('ajusteinventario') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('AjusteInventario') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('modificarprima') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('ModificarPrima') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('consultaprima') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('ConsultaPrima') }}
                     </x-nav-link>
                 </div>
             </div>

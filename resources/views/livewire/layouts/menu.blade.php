@@ -15,7 +15,7 @@
             &times;
         </button>
 
-        <img src="ruta-de-tu-logo.png" alt="Logo" class="mb-2 mt-6 h-20 max-w-full object-contain">
+        <img src="{{ asset('images/Guantes.png') }}" alt="Logo" class="mb-2 mt-6 h-20 max-w-full object-contain">
 
         <h2 class="mb-5 text-xl font-bold text-slate-800">Menú Principal</h2>
 
