@@ -45,3 +45,6 @@ Route::middleware([
 
 // Ruta para modificar el usuario
 Route::get('/usuarios/{id}/edit', ModificarusuariosAdmin::class) -> name ('EditarUsuario');
+
+// Ruta para modificar la materia prima
+Route::get('materiaprima/{id}/edit', ModificarPrimaAdmin::class) -> name('EditarMateriaPrima');

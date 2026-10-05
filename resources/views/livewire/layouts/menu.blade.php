@@ -15,7 +15,7 @@
             &times;
         </button>
 
-        <img src="{{ asset('images/Guantes.png') }}" alt="Logo" class="mb-2 mt-6 h-20 max-w-full object-contain">
+        <img src="{{ asset('Images/Guantes.png') }}" alt="Logo" class="mb-2 mt-6 h-20 max-w-full object-contain">
 
         <h2 class="mb-5 text-xl font-bold text-slate-800">Menú Principal</h2>
 
@@ -29,7 +29,8 @@
             <a href="#" class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Stock almacén
             </a>
-            <a href="#" class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+            <a href=" {{ route('usuarios') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Usuarios
             </a>
         </nav>
