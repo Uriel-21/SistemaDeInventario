@@ -3,6 +3,7 @@
 use App\Livewire\Admin\AjusteInventarioAdmin;
 use App\Livewire\Admin\CrearusuariosAdmin;
 use App\Livewire\Admin\DashboardAdmin;
+use App\Livewire\Admin\DetallesEntradaPrimaAdmin;
 use App\Livewire\Admin\DevolucionPrimaAdmin;
 use App\Livewire\Admin\EntradaPrimaAdmin;
 use App\Livewire\Admin\ModificarPrimaAdmin;
