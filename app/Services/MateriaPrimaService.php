@@ -32,7 +32,6 @@ class MateriaPrimaService
     public function obtenerDatosMateriaPrima(string $filtro = '')
     {
         return StockMateriaPrima::query()
-            -> Activos()
             -> when($filtro, function ($query, $filtro) {
                 $query -> PorDato($filtro);
             })
@@ -81,8 +80,7 @@ class MateriaPrimaService
         try {
 
             $materiaPrima = StockMateriaPrima::findOrFail($id);
-            $materiaPrima -> isActive = false;
-            $materiaPrima -> save();
+            $materiaPrima -> delete();
 
             return $materiaPrima;
 

@@ -16,7 +16,6 @@ class UserService
     public function obtenerUsuarios(string $filtro = '')
     {
         return User::query()
-            -> usuariosActivos()
             -> when($filtro, function ($query, $filtro) {
                 $query -> PorDato($filtro);
             })
@@ -79,9 +78,7 @@ class UserService
         try {
 
             $usuario = User::findOrFail($id);
-
-            $usuario -> isActive = false;
-            $usuario -> save();
+            $usuario -> delete();
 
             return $usuario;
 
