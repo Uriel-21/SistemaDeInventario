@@ -96,57 +96,8 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Paginación de Laravel Livewire -->
-        @if ($usuarios->hasPages())
-            <div class="mt-6 flex justify-center items-center gap-2">
-
-                <!-- Botón Anterior -->
-                @if ($usuarios->onFirstPage())
-                    <span
-                        class="px-4 py-2 text-sm font-bold text-slate-400 bg-slate-100 border border-amber-900 rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] cursor-not-allowed">
-                        &laquo; Ant
-                    </span>
-                @else
-                    <button wire:click="previousPage"
-                        class="px-4 py-2 text-sm font-bold text-slate-900 bg-white border border-amber-900 rounded-xl hover:bg-[#FFD600] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] transition-colors">
-                        &laquo; Ant
-                    </button>
-                @endif
-
-                <!-- Números de Página -->
-                @for ($i = 1; $i <= $usuarios->lastPage(); $i++)
-                    @if ($i == $usuarios->currentPage())
-                        <!-- Página Actual (Amarillo) -->
-                        <span
-                            class="px-4 py-2 text-sm font-black text-slate-950 bg-[#D99B00] border border-amber-900 rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)]">
-                            {{ $i }}
-                        </span>
-                    @else
-                        <!-- Otras Páginas (Blancas) -->
-                        <button wire:click="gotoPage({{ $i }})"
-                            class="px-4 py-2 text-sm font-bold text-slate-900 bg-white border border-amber-900 rounded-xl hover:bg-[#FFD600] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] transition-colors">
-                            {{ $i }}
-                        </button>
-                    @endif
-                @endfor
-
-                <!-- Botón Siguiente -->
-                @if ($usuarios->hasMorePages())
-                    <button wire:click="nextPage"
-                        class="px-4 py-2 text-sm font-bold text-slate-900 bg-white border border-amber-900 rounded-xl hover:bg-[#FFD600] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] transition-colors">
-                        Sig &raquo;
-                    </button>
-                @else
-                    <span
-                        class="px-4 py-2 text-sm font-bold text-slate-400 bg-slate-100 border border-amber-900 rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] cursor-not-allowed">
-                        Sig &raquo;
-                    </span>
-                @endif
-
-            </div>
-        @endif
-
-        <!-- JS para controlar el Menú Lateral -->
-        <script src="{{ asset('js/Menu.js') }}"></script>
+        {{-- Paginacion --}}
+        <div class="mt-4">
+            {{ $usuarios->links() }}
+        </div>
 </div>
