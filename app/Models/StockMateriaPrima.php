@@ -40,4 +40,9 @@ class StockMateriaPrima extends Model
     {
         return $this -> hasMany(EntradaMateriaPrima::class);
     }
+
+    public function devoluciones() : HasMany
+    {
+        return $this -> hasMany(DevolucionMateriaPrima::class);
+    }
 }

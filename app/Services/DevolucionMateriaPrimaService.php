@@ -2,19 +2,19 @@
 
 namespace App\Services;
 use App\Models\StockMateriaPrima;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use App\Models\EntradaMateriaPrima;
+use App\Models\DevolucionMateriaPrima;
 use Carbon\Carbon;
+use CBOR\Tag\StringReferenceNamespaceTag;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
-class EntradaMateriaPrimaService
+class DevolucionMateriaPrimaService
 {
-
-    // Funcion para mandar datos para la seleccion de material
+    // Funcion para buscar y seleccionar el material
     public function BuscarSeleccionar(string $filtro)
     {
-          return StockMateriaPrima::query()
+        return StockMateriaPrima::query()
             -> when($filtro, function ($query, $filtro) {
                 $query -> PorDato($filtro);
             })
@@ -23,28 +23,28 @@ class EntradaMateriaPrimaService
             -> get();
     }
 
-    // Funcion para guardar entrada de materia prima
-    public function guardarEntrada(array $data)
+    // Funcion para guardar la devolucion de la materia prima
+    public function guardarDevolucion(array $data)
     {
         try {
             return DB::transaction(function () use ($data) {
 
-                $entradaMateriaPrima = EntradaMateriaPrima::create([
+                $devolucionMateriaPrima = DevolucionMateriaPrima::create([
                     'user_id' => $data['user_id'],
                     'stock_materia_prima_id' => $data['materiaPrimaId'],
                     'cantidad_dm' => $data['cantidad_dm'],
                     'proveedor' => $data['proveedor'],
-                    'observaciones' => $data['observaciones'] ?? null
+                    'motivo' => $data['motivo'] ?? null
                 ]);
 
                 $materiaPrima = StockMateriaPrima::findOrFail($data['materiaPrimaId']);
-                $materiaPrima -> increment('stock_real_dm', $data['cantidad_dm']);
+                $materiaPrima -> decrement('stock_real_dm', $data['cantidad_dm']);
 
                 if(!empty($data['foto_path'])) {
                     foreach ($data['foto_path'] as $foto) {
-                        $rutaFoto = $foto -> store('evidencias/entradas', 'public');
+                        $rutaFoto = $foto -> store('evidencias/devoluciones', 'public');
 
-                        $entradaMateriaPrima->fotos()->create([
+                        $devolucionMateriaPrima->fotos()->create([
                             'foto_path' => $rutaFoto
                         ]);
                     }
@@ -56,14 +56,15 @@ class EntradaMateriaPrimaService
         }
     }
 
+    // Funcion para hacer consultas aplicando filtros desde el frontend
     private function construirConsultaFiltros(string $busqueda = '', string $filtroTiempo = '')
     {
-        return EntradaMateriaPrima::query()
+        return DevolucionMateriaPrima::query()
             ->with(['materiaPrima', 'user'])
-            ->when($busqueda, function ($query, $busqueda) {
-                $query->porDato($busqueda);
+            ->when($busqueda, function($query, $busqueda){
+                $query -> PorDato($busqueda);
             })
-            ->when($filtroTiempo === 'dia', function ($query) {
+                      ->when($filtroTiempo === 'dia', function ($query) {
                 $query->whereDate('created_at', Carbon::today());
             })
             ->when($filtroTiempo === 'semana', function ($query) {
@@ -75,24 +76,26 @@ class EntradaMateriaPrimaService
             });
     }
 
-    public function obtenerRegistrosEntradas(string $busqueda = '', string $filtroTiempo = '')
+    // Funcion para obtener todos los registros de las devoluciones
+    public function obtenerRegistrosDevoluciones(string $busqueda = '', string $filtroTiempo)
     {
-        return $this->construirConsultaFiltros($busqueda, $filtroTiempo)
+        return $this -> construirConsultaFiltros($busqueda, $filtroTiempo)
             ->latest()
             ->paginate(10);
     }
 
+    // Funcion para poder exportar en Excel y PDF
     public function obtenerParaExportar(string $busqueda = '', string $filtroTiempo = '')
     {
-        return $this->construirConsultaFiltros($busqueda, $filtroTiempo)
+        return $this -> construirConsultaFiltros($busqueda, $filtroTiempo)
             ->latest()
             ->get();
     }
 
     // Funcion para obtener todos los datos para el modal
-    public function obtenerDetalleEntrada(int $id)
+    public function obtenerDetallesDevolucion(int $id)
     {
-        return EntradaMateriaPrima::with([
+        return DevolucionMateriaPrima::with([
             'user',
             'materiaPrima',
             'fotos'

@@ -4,19 +4,17 @@ namespace App\Livewire\Forms;
 
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use Illuminate\Validation\Rule;
 use Livewire\Attributes\Locked;
 
-
-class EntradaMateriaPrima extends Form
+class DevolucionMateriaPrima extends Form
 {
     #[Locked]
-    public ?int $entradaId = null;
+    public ?int $devolucionId = null;
 
     public int $materiaPrimaId = 0;
     public float $cantidad_dm = 0;
     public string $proveedor = '';
-    public string $observaciones = '';
+    public string $motivo = '';
     public array $foto_path = [];
 
     public function rules() : array
@@ -24,10 +22,10 @@ class EntradaMateriaPrima extends Form
         return [
             'materiaPrimaId' => ['integer', 'required'],
             'cantidad_dm' => ['numeric'],
-            'proveedor' => ['string', 'required ', 'min:2', 'max:100'],
-            'observaciones' => ['string', 'min:2', 'max:255', 'nullable'],
+            'proveedor' => ['string', 'required', 'min:2', 'max:100'],
+            'motivo' => ['string', 'min:2', 'max:255', 'required'],
             'foto_path' => ['nullable', 'array', 'max:5'],
-            'foto_path.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'foto_path.*' => ['image',  'mimes:png,jpg,jpeg,webp', 'max:2048']
         ];
     }
 }
