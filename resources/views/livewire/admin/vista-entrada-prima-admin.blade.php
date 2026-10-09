@@ -17,7 +17,7 @@
             {{-- Búsqueda y filtros --}}
             <div class="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div class="relative w-full lg:max-w-lg">
-                    {{-- 1. Se enlazó el buscador con wire:model.live --}}
+
                     <input type="search" wire:model.live.debounce.300ms="search" placeholder="Buscar registro..."
                         class="w-full border border-slate-900 bg-gray-200 px-3 py-2 pr-10 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500">
 
@@ -110,7 +110,7 @@
                         {{-- Texto mientras procesa --}}
                         <span wire:loading wire:target="exportarExcel" class="animate-pulse">Generando...</span>
                     </button>
-                    <a href="/entradaprima" wire:navigate
+                    <a href="{{ route('entradaprima') }}" wire:navigate
                         class="inline-flex items-center justify-center rounded-md border border-slate-900 bg-[#FFD600] px-4 py-2 text-xs font-bold text-slate-950 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-amber-400 active:translate-y-0.5">
                         <svg class="mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />

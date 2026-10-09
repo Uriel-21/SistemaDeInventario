@@ -24,8 +24,9 @@
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Materia prima
             </a>
-            <a href="#" class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Rendimiento
+            <a href="{{ route('vistadevolucionprima') }}"
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                Devolución de materia prima
             </a>
             <a href=" {{ route('consultaprima') }} "
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
