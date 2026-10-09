@@ -20,14 +20,16 @@
         <h2 class="mb-5 text-xl font-bold text-slate-800">Menú Principal</h2>
 
         <nav class="flex w-full flex-col items-center gap-4">
-            <a href="#" class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+            <a href=" {{ route('materiaprima') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Materia prima
             </a>
             <a href="#" class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Rendimiento
             </a>
-            <a href="#" class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Stock almacén
+            <a href=" {{ route('consultaprima') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                Entradas de Materia prima
             </a>
             <a href=" {{ route('usuarios') }} "
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">

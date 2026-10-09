@@ -74,6 +74,12 @@ class MateriaPrimaService
         return $this -> obtenerInformacionPorId($id) -> only(['id', 'folio', 'nombre', 'stock_minimo', 'ubicacion']);
     }
 
+    // Funcion para obtener los datos para la seleccion
+    public function obtenerDatosParaSeleccion(int $id)
+    {
+        return $this -> obtenerInformacionPorId($id) -> only(['id', 'folio', 'nombre']);
+    }
+
     // Funcion para eliminar o desactivar el registro
     public function desactivarRegistro(int $id)
     {
