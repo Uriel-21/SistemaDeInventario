@@ -36,20 +36,9 @@
                     <!-- Nombre (s) -->
                     <div class="space-y-1.5">
                         <label for="nombre" class="block text-sm font-bold text-slate-800">
-                            Nombre (s):
+                            Nombre y apellido (s):
                         </label>
-                        <input type="text" id="nombre" wire:model="form.first_name" placeholder="José Jesús"
-                            required
-                            class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
-                    </div>
-
-                    <!-- Apellidos -->
-                    <div class="space-y-1.5">
-                        <label for="apellidos" class="block text-sm font-bold text-slate-800">
-                            Apellidos:
-                        </label>
-                        <input type="text" id="apellidos" wire:model="form.last_name" placeholder="Gómez Pérez"
-                            required
+                        <input type="text" id="nombre" wire:model="form.name" placeholder="José Jesús" required
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
                     </div>
 

@@ -45,7 +45,7 @@
             </div>
 
             {{-- Tabla --}}
-            <div class="overflow-x-auto border border-slate-900">
+            <div wire:poll.5s class="overflow-x-auto border border-slate-900">
                 <table class="w-full min-w-[650px] border-collapse text-left">
                     <thead>
                         <tr
