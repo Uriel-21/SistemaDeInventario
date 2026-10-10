@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hamcrest\Xml\HasXPath;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,5 +45,10 @@ class StockMateriaPrima extends Model
     public function devoluciones() : HasMany
     {
         return $this -> hasMany(DevolucionMateriaPrima::class);
+    }
+
+    public function ajustes() : HasMany
+    {
+        return $this -> hasMany(AjustesInventario::class);
     }
 }

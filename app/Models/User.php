@@ -95,4 +95,9 @@ class User extends Authenticatable
     {
         return $this -> hasMany(DevolucionMateriaPrima::class);
     }
+
+    public function ajustes() : HasMany
+    {
+        return $this -> hasMany(AjustesInventario::class);
+    }
 }
