@@ -16,38 +16,38 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('vistadevolucionprima') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('VistaDevolucionPrima') }}
+                    <x-nav-link href="{{ route('vistaasignaciones') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('VistaAsignaciones') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('vistaajusteinventario') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('VistaAjusteInventario') }}
+                    <x-nav-link href="{{ route('vistahistorialasignaciones') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('VistaHistorialAsig') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('entradaprima') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('EntradaPrima') }}
+                    <x-nav-link href="{{ route('seleccionarcortador') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('SeleccionarCortador') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('devolucionprima') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('DevolucionPrima') }}
+                    <x-nav-link href="{{ route('seleccionarmaterial') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('SeleccionarMaterial') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('ajusteinventario') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('AjusteInventario') }}
+                    <x-nav-link href="{{ route('materialadicional') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('MaterialAdicional') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('modificarprima') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('ModificarPrima') }}
+                    <x-nav-link href="{{ route('finalizarasignacion') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('FinalizarAsig') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('consultaprima') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('ConsultaPrima') }}
+                    <x-nav-link href="{{ route('vistacortador') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('VistaCortador') }}
                     </x-nav-link>
                 </div>
             </div>
