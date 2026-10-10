@@ -122,4 +122,5 @@
             </div>
         </div>
     </main>
+    <livewire:layouts.modal-ajustes-admin />
 </div>

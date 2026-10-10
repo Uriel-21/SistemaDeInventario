@@ -100,6 +100,7 @@ class AjusteInventarioServices
         return AjustesInventario::with([
             'user',
             'materiaPrima'
-        ]);
+        ])
+        ->find($id);
     }
 }
