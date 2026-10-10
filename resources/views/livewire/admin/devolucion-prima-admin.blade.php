@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     {{-- Nuevo header refactoizado --}}
-    <livewire:layouts.header title="Control de Matria Prima" subtitle="Datos generales del lote" />
+    <livewire:layouts.header title="Control de Materia Prima" subtitle="Datos generales del lote" />
 
     {{-- Nuevo menu refactorizado --}}
     <livewire:layouts.menu />
