@@ -24,7 +24,7 @@ class VistaPrimaAdmin extends Component
             $service -> desactivarRegistro($id);
             session() -> flash('mensaje', 'Registro eliminado correctamente');
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             session() -> flash('error', 'Ocurrio un problema al intentar borrar el registro');
         }
     }

@@ -38,6 +38,12 @@ class DevolucionMateriaPrimaService
                 ]);
 
                 $materiaPrima = StockMateriaPrima::findOrFail($data['materiaPrimaId']);
+
+                if($data['cantidad_dm'] > $materiaPrima -> stock_real_dm) {
+
+                    throw new \Exception('El stock actual es insuficiente para realizar esta devolución.');
+                }
+
                 $materiaPrima -> decrement('stock_real_dm', $data['cantidad_dm']);
 
                 if(!empty($data['foto_path'])) {

@@ -43,10 +43,11 @@ class DevolucionPrimaAdmin extends Component
             session() -> flash('success', 'Devolución registrada con éxito');
             return $this -> redirectRoute('vistadevolucionprima');
 
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
 
             Log::error('Fallo al guardar la devolución de la materia prima' . $e->getMessage());
             session() -> flash('error', 'Ocurrio algun problema interno al guardar la devolución. Intenta nuevamente');
+            $this -> addError('form.cantidad_dm', $e -> getMessage());
         }
     }
 
