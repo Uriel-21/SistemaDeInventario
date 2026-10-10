@@ -3,17 +3,24 @@
 use App\Livewire\Admin\AjusteInventarioAdmin;
 use App\Livewire\Admin\CrearusuariosAdmin;
 use App\Livewire\Admin\DashboardAdmin;
-use App\Livewire\Admin\DetallesEntradaPrimaAdmin;
 use App\Livewire\Admin\DevolucionPrimaAdmin;
 use App\Livewire\Admin\EntradaPrimaAdmin;
+use App\Livewire\Admin\FinalizarAsignacionAdmin;
+use App\Livewire\Admin\MaterialAdicionalAdmin;
 use App\Livewire\Admin\ModificarPrimaAdmin;
 use App\Livewire\Admin\ModificarusuariosAdmin;
 use App\Livewire\Admin\RegistroPrimaAdmin;
+use App\Livewire\Admin\SeleccionarCortadorAdmin;
+use App\Livewire\Admin\SeleccionarMaterialAdmin;
 use App\Livewire\Admin\VistaAjusteInventarioAdmin;
+use App\Livewire\Admin\VistaAsignacionesAdmin;
 use App\Livewire\Admin\VistaDevolucionPrimaAdmin;
 use App\Livewire\Admin\VistaEntradaPrimaAdmin;
+use App\Livewire\Admin\VistaHistorialAsignacionesAdmin;
 use App\Livewire\Admin\VistaPrimaAdmin;
 use App\Livewire\Admin\VistausuariosAdmin;
+use App\Livewire\Cortador\VistaCortador;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,6 +40,13 @@ Route::get('/modificarprima', ModificarPrimaAdmin::class)->name('modificarprima'
 Route::get('/consultaprima', VistaEntradaPrimaAdmin::class)->name('consultaprima');
 Route::get('/vistadevolucionprima', VistaDevolucionPrimaAdmin::class)->name('vistadevolucionprima');
 Route::get('/vistaajusteinventario', VistaAjusteInventarioAdmin::class)->name('vistaajusteinventario');
+Route::get('/vistaasignaciones', VistaAsignacionesAdmin::class)->name('vistaasignaciones');
+Route::get('/vistahistorialasignaciones', VistaHistorialAsignacionesAdmin::class)->name('vistahistorialasignaciones');
+Route::get('/seleccionarcortador', SeleccionarCortadorAdmin::class)->name('seleccionarcortador');
+Route::get('/seleccionarmaterial', SeleccionarMaterialAdmin::class)->name('seleccionarmaterial');
+Route::get('/materialadicional', MaterialAdicionalAdmin::class)->name('materialadicional');
+Route::get('/finalizarasignacion', FinalizarAsignacionAdmin::class)->name('finalizarasignacion');
+Route::get('/vistacortador', VistaCortador::class)->name('vistacortador');
 
 
 Route::middleware([
