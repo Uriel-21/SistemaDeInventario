@@ -32,6 +32,10 @@
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Entradas de Materia prima
             </a>
+            <a href=" {{ route('vistaajusteinventario') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                Ajuste de inventario
+            </a>
             <a href=" {{ route('usuarios') }} "
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Usuarios

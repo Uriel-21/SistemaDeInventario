@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Services\DevolucionMateriaPrimaService;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\DevolucionesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VistaDevolucionPrimaAdmin extends Component
 {
@@ -33,7 +35,7 @@ class VistaDevolucionPrimaAdmin extends Component
     public function exportarPdf(DevolucionMateriaPrimaService $service)
     {
         $devoluciones = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
-        $pdf = Pdf::loadView('pdf.reporte-entradas', ['entradas' => $devoluciones]);
+        $pdf = Pdf::loadView('pdf.reporte-devoluciones', ['devoluciones' => $devoluciones]);
         return response() -> streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'Reporte_devoluciones_' . date('Y-m-d') . '.pdf');
@@ -41,23 +43,12 @@ class VistaDevolucionPrimaAdmin extends Component
 
     public function exportarExcel(DevolucionMateriaPrimaService $service)
     {
-                $devoluciones = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
+        $devoluciones = $service->obtenerParaExportar($this->search, $this->filtroTiempo);
 
-        return response() -> streamDownload(function () use ($devoluciones) {
-            $archivo = fopen('php://output', 'w');
-            fputs($archivo, chr(0xEF) . chr(0xBB) . chr(0xBF));
-            fputcsv($archivo, ['Material', 'Cantidad (dm)', 'Proveedor', 'Registrado por', 'Fecha y hora']);
-            foreach ($devoluciones as $devolucion) {
-                fputcsv($archivo, [
-                    $devolucion->materiaPrima->nombre ?? 'N/A',
-                    $devolucion->cantidad_dm,
-                    $devolucion->proveedor,
-                    $devolucion->user->name ?? 'N/A',
-                    $devolucion->created_at->format('d/m/Y H:i')
-                ]);
-            }
-            fclose($archivo);
-        }, 'Reporte_devoluciones_' . date('Y-m-d') . '.csv');
+        return Excel::download(
+            new DevolucionesExport($devoluciones),
+            'Reporte_Devoluciones_' . date('Y-m-d') . '.xlsx'
+        );
     }
 
     public function render(DevolucionMateriaPrimaService $service)

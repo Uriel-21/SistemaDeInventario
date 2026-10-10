@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Services\EntradaMateriaPrimaService;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\EntradasExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class VistaEntradaPrimaAdmin extends Component
@@ -41,23 +43,12 @@ class VistaEntradaPrimaAdmin extends Component
 
     public function exportarExcel(EntradaMateriaPrimaService $service)
     {
-        $entradas = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
+        $entradas = $service->obtenerParaExportar($this->search, $this->filtroTiempo);
 
-        return response() -> streamDownload(function () use ($entradas) {
-            $archivo = fopen('php://output', 'w');
-            fputs($archivo, chr(0xEF) . chr(0xBB) . chr(0xBF));
-            fputcsv($archivo, ['Material', 'Cantidad (dm)', 'Proveedor', 'Registrado por', 'Fecha y hora']);
-            foreach ($entradas as $entrada) {
-                fputcsv($archivo, [
-                    $entrada->materiaPrima->nombre ?? 'N/A',
-                    $entrada->cantidad_dm,
-                    $entrada->proveedor,
-                    $entrada->user->name ?? 'N/A',
-                    $entrada->created_at->format('d/m/Y H:i')
-                ]);
-            }
-            fclose($archivo);
-        }, 'Reporte_entradas_' . date('Y-m-d') . '.csv');
+        return Excel::download(
+            new EntradasExport($entradas),
+            'Reporte_Entradas_' . date('Y-m-d') . '.xlsx'
+        );
     }
 
     public function render(EntradaMateriaPrimaService $service)

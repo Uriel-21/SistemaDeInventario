@@ -81,7 +81,7 @@
                         @empty
                             <tr>
                                 <td colspan="5" class="p-6 text-center text-gray-500 font-medium">
-                                    No se encontraron registros de entradas.
+                                    No se encontraron registros de devoluciones.
                                 </td>
                             </tr>
                         @endforelse

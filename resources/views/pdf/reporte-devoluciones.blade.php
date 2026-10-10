@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reporte de Entradas</title>
+    <title>Reporte de Devoluciones</title>
     <style>
         @page {
             margin: 40px 50px;
@@ -128,7 +128,7 @@
                 <img src="{{ public_path('Images/Guantes.png') }}" class="logo" alt="Logo Empresa">
             </td>
             <td class="title-container">
-                <h1>Reporte de Entradas</h1>
+                <h1>Reporte de Devoluciones</h1>
                 <div class="fecha">
                     Generado el: {{ \Carbon\Carbon::now('America/Mexico_City')->format('d/m/Y h:i A') }}
                 </div>
@@ -148,13 +148,13 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($entradas as $index => $entrada)
+            @forelse ($devoluciones as $index => $devolucion)
                 <tr class="{{ $index % 2 === 0 ? 'bg-gray' : '' }}">
-                    <td>{{ $entrada->materiaPrima->nombre ?? 'N/A' }}</td>
-                    <td class="col-number font-bold">{{ number_format($entrada->cantidad_dm, 2) }}</td>
-                    <td>{{ $entrada->proveedor }}</td>
-                    <td>{{ $entrada->user->name ?? 'N/A' }}</td>
-                    <td class="col-center">{{ $entrada->created_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ $devolucion->materiaPrima->nombre ?? 'N/A' }}</td>
+                    <td class="col-number font-bold">{{ number_format($devolucion->cantidad_dm, 2) }}</td>
+                    <td>{{ $devolucion->proveedor }}</td>
+                    <td>{{ $devolucion->user->name ?? 'N/A' }}</td>
+                    <td class="col-center">{{ $devolucion->created_at->format('d/m/Y H:i') }}</td>
                 </tr>
             @empty
                 <tr>
