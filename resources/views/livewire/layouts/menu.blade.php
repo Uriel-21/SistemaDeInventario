@@ -36,6 +36,14 @@
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Ajuste de inventario
             </a>
+            <a href=" {{ route('asignaciones.index') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                Asignaciones
+            </a>
+            <a href=" {{ route('asignaciones.historial') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                Historial asignaciones
+            </a>
             <a href=" {{ route('usuarios') }} "
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Usuarios
