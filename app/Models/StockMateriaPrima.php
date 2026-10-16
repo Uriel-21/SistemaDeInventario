@@ -51,4 +51,8 @@ class StockMateriaPrima extends Model
     {
         return $this -> hasMany(AjustesInventario::class);
     }
+    public function asignaciones() : HasMany
+    {
+        return $this -> hasMany(AsignacionesMaterial::class);
+    }
 }

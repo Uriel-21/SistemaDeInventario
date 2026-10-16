@@ -12,6 +12,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use ReturnTypeWillChange;
 
 class User extends Authenticatable
 {
@@ -99,5 +101,10 @@ class User extends Authenticatable
     public function ajustes() : HasMany
     {
         return $this -> hasMany(AjustesInventario::class);
+    }
+
+    public function asignacion() : HasOne
+    {
+        return $this -> hasOne(AsignacionesMaterial::class);
     }
 }

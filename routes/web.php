@@ -22,6 +22,8 @@ use App\Livewire\Admin\VistausuariosAdmin;
 use App\Livewire\Cortador\VistaCortador;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Asignaciones\AsignacionesIndex;
+use App\Livewire\Admin\Asignaciones\VistaHistorialAsignaciones;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,7 +49,8 @@ Route::get('/seleccionarmaterial', SeleccionarMaterialAdmin::class)->name('selec
 Route::get('/materialadicional', MaterialAdicionalAdmin::class)->name('materialadicional');
 Route::get('/finalizarasignacion', FinalizarAsignacionAdmin::class)->name('finalizarasignacion');
 Route::get('/vistacortador', VistaCortador::class)->name('vistacortador');
-
+Route::get('/asignaciones', AsignacionesIndex::class) -> name('asignaciones.index');
+Route::get('/historial-asignaciones', VistaHistorialAsignaciones::class) -> name('asignaciones.historial');
 
 Route::middleware([
     'auth:sanctum',
