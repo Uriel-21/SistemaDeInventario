@@ -25,7 +25,7 @@
                                 {{ $asignacion->materiaPrima->nombre ?? 'Material no encontrado' }}
                             </td>
 
-                            <td class="p-3 font-bold text-slate-700 text-center">
+                            <td class="border border-slate-900 p-3 font-bold text-slate-700 text-center">
                                 {{ number_format($asignacion->dm_iniciales, 2) }}
                                 @if ($asignacion->dm_adicionales > 0)
                                     <span class="text-amber-600">+

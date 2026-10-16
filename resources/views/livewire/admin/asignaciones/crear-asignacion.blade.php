@@ -285,17 +285,17 @@
                                 {{ $form->dm_iniciales ?: '0' }} dm
                             </li>
                             <li>
-                                <span class="font-medium">Gasto por unidad:</span>
+                                <span class="font-medium">Gasto por tarea (25 Unidades):</span>
                                 {{ $form->consumo_estimado ?: '0' }} dm
                             </li>
                             <li>
-                                <span class="font-medium">Piezas estimadas:</span>
+                                <span class="font-medium">Tareas estimadas:</span>
                                 @if ($form->dm_iniciales && $form->consumo_estimado && $form->consumo_estimado > 0)
                                     {{ floor($form->dm_iniciales / $form->consumo_estimado) }}
                                 @else
                                     0
                                 @endif
-                                piezas
+                                Tareas
                             </li>
                         </ul>
                     </div>

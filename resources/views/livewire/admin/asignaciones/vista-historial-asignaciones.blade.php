@@ -56,7 +56,7 @@
                                 <th class="p-2 sm:p-3">Fecha</th>
                                 <th class="p-2 sm:p-3">Cortador</th>
                                 <th class="p-2 sm:p-3">Material Utilizado</th>
-                                <th class="p-2 sm:p-3">Tareas Entregadas</th>
+                                <th class="p-2 sm:p-3">Tareas Entregadas / Cortes Entregados</th>
                                 <th class="p-2 sm:p-3">Rendimiento (dm/tarea)</th>
                             </tr>
                         </thead>
@@ -69,10 +69,9 @@
                                         {{ $asignacion->updated_at->format('d/m/Y H:i') }}</td>
                                     <td class="p-2 sm:p-3">{{ $asignacion->user->name }}</td>
 
-                                    {{-- Desglose del material en caso de que haya devoluciones o extras --}}
                                     <td class="p-2 sm:p-3">
                                         <span class="block font-bold">{{ $asignacion->materiaPrima->nombre }}</span>
-                                        <span class="text-xs text-gray-500">Total mesa:
+                                        <span class="text-xs text-gray-500">Total de material:
                                             {{ number_format($asignacion->dm_iniciales + ($asignacion->dm_adicionales ?? 0), 2) }}
                                             dm</span>
                                         @if ($asignacion->dm_sobrantes > 0)
