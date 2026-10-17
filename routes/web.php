@@ -1,14 +1,20 @@
 <?php
 
+use App\Livewire\Admin\AgregarLoteAdmin;
+use App\Livewire\Admin\AgregarNuevoModeloAdmin;
 use App\Livewire\Admin\AjusteInventarioAdmin;
 use App\Livewire\Admin\CrearusuariosAdmin;
 use App\Livewire\Admin\DashboardAdmin;
 use App\Livewire\Admin\DevolucionPrimaAdmin;
 use App\Livewire\Admin\EntradaPrimaAdmin;
 use App\Livewire\Admin\FinalizarAsignacionAdmin;
+use App\Livewire\Admin\HistorialLotesAdmin;
+use App\Livewire\Admin\HistorialSalidasAdmin;
 use App\Livewire\Admin\MaterialAdicionalAdmin;
+use App\Livewire\Admin\ModificarModeloAdmin;
 use App\Livewire\Admin\ModificarPrimaAdmin;
 use App\Livewire\Admin\ModificarusuariosAdmin;
+use App\Livewire\Admin\RegistrarSalidaAdmin;
 use App\Livewire\Admin\RegistroPrimaAdmin;
 use App\Livewire\Admin\SeleccionarCortadorAdmin;
 use App\Livewire\Admin\SeleccionarMaterialAdmin;
@@ -18,6 +24,7 @@ use App\Livewire\Admin\VistaDevolucionPrimaAdmin;
 use App\Livewire\Admin\VistaEntradaPrimaAdmin;
 use App\Livewire\Admin\VistaHistorialAsignacionesAdmin;
 use App\Livewire\Admin\VistaPrimaAdmin;
+use App\Livewire\Admin\VistaProductoTerminadoAdmin;
 use App\Livewire\Admin\VistausuariosAdmin;
 use App\Livewire\Cortador\VistaCortador;
 use Illuminate\Auth\Events\Login;
@@ -51,6 +58,13 @@ Route::get('/finalizarasignacion', FinalizarAsignacionAdmin::class)->name('final
 Route::get('/vistacortador', VistaCortador::class)->name('vistacortador');
 Route::get('/asignaciones', AsignacionesIndex::class) -> name('asignaciones.index');
 Route::get('/historial-asignaciones', VistaHistorialAsignaciones::class) -> name('asignaciones.historial');
+Route::get('/productoterminado', VistaProductoTerminadoAdmin::class) -> name('productoterminado');
+Route::get('/agregarmodelo', AgregarNuevoModeloAdmin::class) -> name('agregarmodelo');
+Route::get('/modificarmodelo', ModificarModeloAdmin::class) -> name('modificarmodelo');
+Route::get('/historiallotes', HistorialLotesAdmin::class) -> name('historiallotes');
+Route::get('/agregarlote', AgregarLoteAdmin::class) -> name('agregarlote');
+Route::get('/historialsalidas', HistorialSalidasAdmin::class) -> name('historialsalidas');
+Route::get('/registrarsalida', RegistrarSalidaAdmin::class) -> name('registrarsalida');
 
 Route::middleware([
     'auth:sanctum',
