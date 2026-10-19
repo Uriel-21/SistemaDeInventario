@@ -26,9 +26,6 @@ class ModificarusuariosAdmin extends Component
     {
         $datos = $this -> form -> validate();
 
-        $datos['name'] = trim($datos['first_name'] . ' ' . $datos['last_name']);
-        unset($datos['first_name'], $datos['last_name']);
-
         $this -> service -> modificarUsuario($this -> form -> userId, $datos);
 
         session() -> flash('mensaje', 'Usuario actualizado correctamente');

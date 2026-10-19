@@ -26,10 +26,8 @@ class CrearusuariosAdmin extends Component
     {
         $this -> form -> validate();
 
-        $nombreCompleto = trim($this ->form -> first_name . ' ' . $this -> form -> last_name);
-
         $data = [
-            'name' => $nombreCompleto,
+            'name' => $this -> form -> name,
             'email' => $this -> form -> email,
             'telefono' => $this -> form -> telefono,
             'password' => $this -> password

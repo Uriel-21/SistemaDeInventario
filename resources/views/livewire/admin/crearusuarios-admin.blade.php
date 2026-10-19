@@ -12,7 +12,9 @@
     <livewire:layouts.menu />
 
     <!-- Contenido Principal -->
-    <main>
+    <!-- Contenido Principal -->
+    <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+        <!-- Alertas de Éxito y Error -->
         <!-- Alertas de Éxito y Error (Se muestran solo cuando hay un mensaje en sesión) -->
         @if (session()->has('mensaje'))
             <div
@@ -36,21 +38,14 @@
                     <!-- Nombre (s) -->
                     <div class="space-y-1.5">
                         <label for="nombre" class="block text-sm font-bold text-slate-800">
-                            Nombre (s):
+                            Nombre y apellido(s):
                         </label>
-                        <input type="text" id="nombre" wire:model="form.first_name" placeholder="José Jesús"
+                        <input type="text" id="nombre" wire:model="form.name" placeholder="José Hernández"
                             required
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
-                    </div>
-
-                    <!-- Apellidos -->
-                    <div class="space-y-1.5">
-                        <label for="apellidos" class="block text-sm font-bold text-slate-800">
-                            Apellidos:
-                        </label>
-                        <input type="text" id="apellidos" wire:model="form.last_name" placeholder="Gómez Pérez"
-                            required
-                            class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.name')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Número celular -->
@@ -61,6 +56,9 @@
                         <input type="text" id="celular" wire:model="form.telefono" placeholder="4741469315"
                             required
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.telefono')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Correo electrónico -->
@@ -71,6 +69,9 @@
                         <input type="email" id="email" wire:model="form.email" placeholder="ejemplo@gmail.com"
                             required
                             class="w-full rounded-2xl border border-slate-400 bg-white px-4 py-2 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                        @error('form.email')
+                            <span class="text-xs text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Contraseña provisional -->
@@ -130,8 +131,8 @@
                 </a>
             </div>
         </form>
-    </main>
+        </>
 
-    <!-- JS para controlar el Menú Lateral -->
-    <script src="{{ asset('js/Menu.js') }}"></script>
+        <!-- JS para controlar el Menú Lateral -->
+        <script src="{{ asset('js/Menu.js') }}"></script>
 </div>

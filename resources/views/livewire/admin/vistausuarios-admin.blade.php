@@ -41,8 +41,7 @@
                 <thead>
                     <tr
                         class="border-b border-amber-900 bg-[#D99B00] text-slate-950 text-xs sm:text-sm font-bold divide-x divide-amber-900">
-                        <th class="p-2 sm:p-3">Nombre (s)</th>
-                        <th class="p-2 sm:p-3">Apellidos</th>
+                        <th class="p-2 sm:p-3">Nombre y apellido (s)</th>
                         <th class="p-2 sm:p-3">Número celular</th>
                         <th class="p-2 sm:p-3">Correo electrónico</th>
                         <th class="p-2 sm:p-3">Rol</th>
@@ -52,17 +51,9 @@
                 <tbody class="divide-y divide-amber-900">
 
                     @forelse ($usuarios as $usuario)
-                        @php
-                            // Separar el nombre completo en 2 partes
-                            $partes = explode(' ', $usuario->name, 2);
-                            $nombreVista = $partes[0] ?? '';
-                            $apellidosVista = $partes[1] ?? '';
-                        @endphp
-
                         <tr
                             class="divide-x divide-amber-900 h-12 text-xs sm:text-sm font-medium text-slate-900 bg-[#F5D477] hover:bg-[#ebd083] transition-colors">
-                            <td class="p-2">{{ $nombreVista }}</td>
-                            <td class="p-2">{{ $apellidosVista }}</td>
+                            <td class="p-2">{{ $usuario->name }}</td>
                             <td class="p-2">{{ $usuario->telefono }}</td>
                             <td class="p-2">{{ $usuario->email }}</td>
                             <td class="p-2">
