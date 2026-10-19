@@ -65,6 +65,7 @@ Route::get('/historiallotes', HistorialLotesAdmin::class) -> name('historiallote
 Route::get('/agregarlote', AgregarLoteAdmin::class) -> name('agregarlote');
 Route::get('/historialsalidas', HistorialSalidasAdmin::class) -> name('historialsalidas');
 Route::get('/registrarsalida', RegistrarSalidaAdmin::class) -> name('registrarsalida');
+Route::Get('/productoTerminado/{id}/edit', ModificarModeloAdmin::class) -> name('modelo.edit');
 
 Route::middleware([
     'auth:sanctum',
