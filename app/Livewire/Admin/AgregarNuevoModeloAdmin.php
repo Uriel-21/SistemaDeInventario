@@ -16,6 +16,13 @@ class AgregarNuevoModeloAdmin extends Component
         return view('livewire.admin.agregar-nuevo-modelo-admin')->layout('layouts.app');
     }
 
+    public function cancelarRegresar()
+    {
+        $this -> reset();
+        $this -> resetValidation();
+        return $this -> redirectRoute('productoterminado');
+    }
+
     public function save(AlmacenProductoTerminadoService $service)
     {
         $this -> form -> validate();

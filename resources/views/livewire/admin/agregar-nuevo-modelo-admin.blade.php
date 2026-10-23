@@ -64,7 +64,7 @@
 
                 {{-- Botones --}}
                 <div class="mt-5 flex flex-col justify-center gap-3 sm:flex-row sm:gap-5">
-                    <button type="button"
+                    <button type="button" wire:click="cancelarRegresar"
                         class="w-full rounded-md border-2 border-slate-900 bg-[#E34B4B] px-6 py-2 text-xs font-semibold text-slate-950 shadow-sm transition hover:bg-red-400 sm:w-auto">
                         Cancelar
                     </button>
