@@ -27,7 +27,6 @@ use App\Livewire\Admin\VistaPrimaAdmin;
 use App\Livewire\Admin\VistaProductoTerminadoAdmin;
 use App\Livewire\Admin\VistausuariosAdmin;
 use App\Livewire\Cortador\VistaCortador;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Asignaciones\AsignacionesIndex;
 use App\Livewire\Admin\Asignaciones\VistaHistorialAsignaciones;
@@ -68,6 +67,7 @@ Route::get('/historialsalidas', HistorialSalidasAdmin::class) -> name('historial
 Route::get('/registrarsalida', RegistrarSalidaAdmin::class) -> name('registrarsalida');
 Route::get('/productoTerminado/{id}/edit', ModificarModeloAdmin::class) -> name('modelo.edit');
 Route::get('/etiquetas_Pendientes', EtiquetasPendientes::class) -> name('etiquetasPendientes');
+
 
 Route::middleware([
     'auth:sanctum',
