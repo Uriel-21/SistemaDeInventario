@@ -38,6 +38,9 @@ class LotesEmpaquetadosService
                     'cantidad' => $data['cantidad'],
                 ]);
 
+                $productoAlmacen = AlmacenProductosTerminados::findOrFail($data['producto_id']);
+                $productoAlmacen -> increment('stock_total', $data['cantidad']);
+
                 cola_impresiones::create([
                     'lote_id' => $lote -> id,
                     'impreso' => false

@@ -15,6 +15,7 @@ class AlmacenProductosTerminados extends Model
         'codigo',
         'nombre_modelo',
         'talla',
+        'stock_total',
         'stock_minimo',
     ];
 

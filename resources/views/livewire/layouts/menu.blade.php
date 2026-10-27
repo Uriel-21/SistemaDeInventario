@@ -48,6 +48,14 @@
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Producto Terminado
             </a>
+            <a href=" {{ route('historiallotes') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                Historial de lotes
+            </a>
+            <a href=" {{ route('etiquetasPendientes') }} "
+                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                Imprimir etiquetas
+            </a>
             <a href=" {{ route('usuarios') }} "
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
                 Usuarios
