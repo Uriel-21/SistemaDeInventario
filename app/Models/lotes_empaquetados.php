@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Livewire\Forms\AlmacenProductoTerminado;
+use App\Services\SalidaProductoTerminadoService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class lotes_empaquetados extends Model
 {
@@ -27,24 +29,30 @@ class lotes_empaquetados extends Model
         return $this -> belongsTo(AlmacenProductosTerminados::class, 'producto_id')->withTrashed();
     }
 
+    public function salida() : HasOne
+    {
+        return $this -> hasOne(SalidasProductosTerminados::class, 'lote_id');
+    }
+
+
     public function scopePorDato(Builder $query, ?string $dato): Builder
     {
-    $dato = trim((string) $dato);
+        $dato = trim((string) $dato);
 
-    return $query->when($dato !== '', function (Builder $q) use ($dato) {
-        $like = '%' . addcslashes($dato, '%_\\') . '%';
+        return $query->when($dato !== '', function (Builder $q) use ($dato) {
+            $like = '%' . addcslashes($dato, '%_\\') . '%';
 
-        $q->where(function(Builder $sub) use ($like) {
+            $q->where(function(Builder $sub) use ($like) {
 
-            $sub->where('codigo_barras', 'LIKE', $like)
+                $sub->where('codigo_barras', 'LIKE', $like)
 
-                ->orWhereHas('productos', function(Builder $relacion) use ($like) {
-                    $relacion->where('codigo', 'LIKE', $like)
-                            ->orWhere('nombre_modelo', 'LIKE', $like)
-                            ->orWhere('talla', 'LIKE', $like);
+                    ->orWhereHas('productos', function(Builder $relacion) use ($like) {
+                        $relacion->where('codigo', 'LIKE', $like)
+                                ->orWhere('nombre_modelo', 'LIKE', $like)
+                                ->orWhere('talla', 'LIKE', $like);
+                    });
                 });
             });
-        });
     }
 
 }

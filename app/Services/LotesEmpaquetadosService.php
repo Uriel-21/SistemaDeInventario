@@ -75,7 +75,20 @@ class LotesEmpaquetadosService
             -> when($busqueda, function ($query, $busqueda) {
                 $query -> PorDato($busqueda);
             })
+            -> where('estado', 'En almacen')
             -> latest()
             -> paginate(10);
+    }
+
+    public function obtenerParaExportar(string $busqueda)
+    {
+        return lotes_empaquetados::query()
+            -> with('productos')
+            -> when($busqueda, function ($query, $busqueda) {
+                $query -> PorDato($busqueda);
+            })
+            -> where('estado', 'En almacen')
+            -> latest()
+            -> get();
     }
 }
