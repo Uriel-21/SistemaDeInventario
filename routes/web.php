@@ -32,7 +32,7 @@ use App\Livewire\Admin\Asignaciones\AsignacionesIndex;
 use App\Livewire\Admin\Asignaciones\VistaHistorialAsignaciones;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', DashboardAdmin::class)->name('dashboard');

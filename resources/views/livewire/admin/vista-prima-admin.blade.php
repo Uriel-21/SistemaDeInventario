@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div>
     <!-- Carga de Fuentes / CDN si aplica -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
