@@ -38,4 +38,9 @@ class AlmacenProductosTerminados extends Model
     {
         return $this -> hasMany(lotes_empaquetados::class);
     }
+
+    public function salidasProductos() : HasMany
+    {
+        return $this -> hasMany(SalidasProductosTerminados::class);
+    }
 }
