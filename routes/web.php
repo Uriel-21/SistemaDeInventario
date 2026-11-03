@@ -33,7 +33,7 @@ use App\Livewire\Admin\Asignaciones\VistaHistorialAsignaciones;
 use App\Livewire\Admin\EtiquetasPendientes;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', DashboardAdmin::class)->name('dashboard');
