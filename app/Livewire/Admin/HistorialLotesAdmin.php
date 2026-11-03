@@ -3,11 +3,26 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
+use App\Services\LotesEmpaquetadosService;
+use Livewire\WithPagination;
 
 class HistorialLotesAdmin extends Component
 {
-    public function render()
+    use WithPagination;
+
+    public $search = '';
+
+    public function updatingSearch()
     {
-        return view('livewire.admin.historial-lotes-admin')->layout('layouts.app');
+        $this -> resetPage();
+    }
+
+    public function render(LotesEmpaquetadosService $service)
+    {
+        $lotes = $service -> obtenerRegistrosLotes($this -> search);
+
+        return view('livewire.admin.historial-lotes-admin', [
+            'lotes' => $lotes
+        ])->layout('layouts.app');
     }
 }

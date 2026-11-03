@@ -30,6 +30,7 @@ use App\Livewire\Cortador\VistaCortador;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Asignaciones\AsignacionesIndex;
 use App\Livewire\Admin\Asignaciones\VistaHistorialAsignaciones;
+use App\Livewire\Admin\EtiquetasPendientes;
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,7 +65,8 @@ Route::get('/historiallotes', HistorialLotesAdmin::class) -> name('historiallote
 Route::get('/agregarlote', AgregarLoteAdmin::class) -> name('agregarlote');
 Route::get('/historialsalidas', HistorialSalidasAdmin::class) -> name('historialsalidas');
 Route::get('/registrarsalida', RegistrarSalidaAdmin::class) -> name('registrarsalida');
-Route::Get('/productoTerminado/{id}/edit', ModificarModeloAdmin::class) -> name('modelo.edit');
+Route::get('/productoTerminado/{id}/edit', ModificarModeloAdmin::class) -> name('modelo.edit');
+Route::get('/etiquetas_Pendientes', EtiquetasPendientes::class) -> name('etiquetasPendientes');
 
 
 Route::middleware([

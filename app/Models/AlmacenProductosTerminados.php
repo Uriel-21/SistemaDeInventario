@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AlmacenProductosTerminados extends Model
@@ -14,6 +15,7 @@ class AlmacenProductosTerminados extends Model
         'codigo',
         'nombre_modelo',
         'talla',
+        'stock_total',
         'stock_minimo',
     ];
 
@@ -29,6 +31,11 @@ class AlmacenProductosTerminados extends Model
                     ->orWhere('nombre_modelo', 'LIKE', $like)
                     ->orWhere('talla', 'LIKE', $like);
             });
-    });
-}
+        });
+    }
+
+    public function lotesEmpaquetados() : HasMany
+    {
+        return $this -> hasMany(lotes_empaquetados::class);
+    }
 }

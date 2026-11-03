@@ -71,7 +71,7 @@ class EntradaMateriaPrimaService
             })
             ->when($filtroTiempo === 'mes', function ($query) {
                 $query->whereMonth('created_at', Carbon::now()->month)
-                      ->whereYear('created_at', Carbon::now()->year);
+                    ->whereYear('created_at', Carbon::now()->year);
             });
     }
 

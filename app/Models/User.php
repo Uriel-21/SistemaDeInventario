@@ -107,4 +107,9 @@ class User extends Authenticatable
     {
         return $this -> hasOne(AsignacionesMaterial::class);
     }
+
+    public function lotesEmpaquetados() : HasMany
+    {
+        return $this -> hasMany(lotes_empaquetados::class);
+    }
 }
