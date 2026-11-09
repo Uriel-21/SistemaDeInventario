@@ -24,13 +24,16 @@ class CrearusuariosAdmin extends Component
 
     public function save(UserService $service)
     {
+        $this -> authorize('crear usuario');
+
         $this -> form -> validate();
 
         $data = [
             'name' => $this -> form -> name,
             'email' => $this -> form -> email,
             'telefono' => $this -> form -> telefono,
-            'password' => $this -> password
+            'password' => $this -> password,
+            'rol' => $this -> form -> rol
         ];
 
         try {

@@ -31,6 +31,8 @@ class HistorialSalidasAdmin extends Component
 
     public function exportarPdf(SalidaProductoTerminadoService $service)
     {
+        $this -> authorize('exportar historial de salidas de producto terminado en pdf');
+
         $salidas = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
         $pdf = Pdf::loadView('pdf.reporte-historial-salidas', ['salidas' => $salidas]);
         return response() -> streamDownload(function () use ($pdf) {

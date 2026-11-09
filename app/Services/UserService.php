@@ -16,6 +16,7 @@ class UserService
     public function obtenerUsuarios(string $filtro = '')
     {
         return User::query()
+            -> with('roles')
             -> when($filtro, function ($query, $filtro) {
                 $query -> PorDato($filtro);
             })
@@ -32,6 +33,12 @@ class UserService
                     'password' => Hash::make($datos['password']),
                     'telefono' => $datos['telefono']
             ]);
+
+            // Asignar el rol
+            if (isset($datos['rol']) && !empty($datos['rol'])) {
+                $usuario -> assignRole($datos['rol']);
+            }
+
             return $usuario;
 
         } catch (Exception $e) {
@@ -43,8 +50,19 @@ class UserService
     // Funcion que devuelve un arreglo para la edicion de usuarios
     public function obtenerDatos(int $id) : array
     {
-        return $this -> obtenerUsuarioPorId($id) -> only(['id', 'name', 'email', 'telefono']);
+        $usuario = $this -> obtenerUsuarioPorId($id);
+
+        $datos = $usuario -> only([
+            'id',
+            'name',
+            'email',
+            'telefono'
+        ]);
+        $datos['rol'] = $usuario->roles->first()?->name ?? '';
+
+        return $datos;
     }
+
     // Funcion para modificar los registros de los usuarios
     public function modificarUsuario(int $id, array $newData)
     {
@@ -59,6 +77,11 @@ class UserService
 
             if (!empty($newData['password'])) {
                 $dataUpdate['password'] = Hash::make($newData['password']);
+            }
+
+            // Sincronizar para actualizar el rol
+            if (isset($newData['rol']) && !empty($newData['rol'])) {
+                $usuario -> syncRoles($newData['rol']);
             }
 
             $usuario -> update($dataUpdate);

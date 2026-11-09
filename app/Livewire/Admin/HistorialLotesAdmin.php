@@ -20,6 +20,8 @@ class HistorialLotesAdmin extends Component
 
     public function exportarPdf(LotesEmpaquetadosService $service)
     {
+        $this -> authorize('exportar lotes en almacen en pdf');
+
         $lotes = $service -> obtenerParaExportar($this -> search);
         $pdf = Pdf::loadView('pdf.reporte-lotes-en-almacen', ['lotes' => $lotes]);
         return response() -> streamDownload(function () use ($pdf) {

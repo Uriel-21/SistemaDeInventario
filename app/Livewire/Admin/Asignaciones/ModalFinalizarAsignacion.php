@@ -54,6 +54,8 @@ class ModalFinalizarAsignacion extends Component
 
     public function save(AsignacionesService $service)
     {
+        $this -> authorize('terminar asignacion');
+
         $dm_disponibles = $this -> asignacion -> dm_iniciales + ($this -> asignacion -> dm_adicionales ?? 0);
 
         $this->validate([

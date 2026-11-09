@@ -36,49 +36,65 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', DashboardAdmin::class)->name('dashboard');
-Route::get('/usuarios', VistausuariosAdmin::class)->name('usuarios');
-Route::get('/crearusuarios', CrearusuariosAdmin::class)->name('crearusuarios');
-Route::get('/modificarusuarios', ModificarusuariosAdmin::class)->name('modificarusuarios');
-Route::get('/materiaprima', VistaPrimaAdmin::class)->name('materiaprima');
-Route::get('/registroprima', RegistroPrimaAdmin::class)->name('registroprima');
-Route::get('/entradaprima', EntradaPrimaAdmin::class)->name('entradaprima');
-Route::get('/devolucionprima', DevolucionPrimaAdmin::class)->name('devolucionprima');
-Route::get('/ajusteinventario', AjusteInventarioAdmin::class)->name('ajusteinventario');
-Route::get('/modificarprima', ModificarPrimaAdmin::class)->name('modificarprima');
-Route::get('/consultaprima', VistaEntradaPrimaAdmin::class)->name('consultaprima');
-Route::get('/vistadevolucionprima', VistaDevolucionPrimaAdmin::class)->name('vistadevolucionprima');
-Route::get('/vistaajusteinventario', VistaAjusteInventarioAdmin::class)->name('vistaajusteinventario');
-Route::get('/vistaasignaciones', VistaAsignacionesAdmin::class)->name('vistaasignaciones');
-Route::get('/vistahistorialasignaciones', VistaHistorialAsignacionesAdmin::class)->name('vistahistorialasignaciones');
-Route::get('/seleccionarcortador', SeleccionarCortadorAdmin::class)->name('seleccionarcortador');
-Route::get('/seleccionarmaterial', SeleccionarMaterialAdmin::class)->name('seleccionarmaterial');
-Route::get('/materialadicional', MaterialAdicionalAdmin::class)->name('materialadicional');
-Route::get('/finalizarasignacion', FinalizarAsignacionAdmin::class)->name('finalizarasignacion');
-Route::get('/vistacortador', VistaCortador::class)->name('vistacortador');
-Route::get('/asignaciones', AsignacionesIndex::class) -> name('asignaciones.index');
-Route::get('/historial-asignaciones', VistaHistorialAsignaciones::class) -> name('asignaciones.historial');
-Route::get('/productoterminado', VistaProductoTerminadoAdmin::class) -> name('productoterminado');
-Route::get('/agregarmodelo', AgregarNuevoModeloAdmin::class) -> name('agregarmodelo');
-Route::get('/modificarmodelo', ModificarModeloAdmin::class) -> name('modificarmodelo');
-Route::get('/historiallotes', HistorialLotesAdmin::class) -> name('historiallotes');
-Route::get('/agregarlote', AgregarLoteAdmin::class) -> name('agregarlote');
-Route::get('/historialsalidas', HistorialSalidasAdmin::class) -> name('historialsalidas');
-Route::get('/registrarsalida', RegistrarSalidaAdmin::class) -> name('registrarsalida');
-Route::get('/productoTerminado/{id}/edit', ModificarModeloAdmin::class) -> name('modelo.edit');
-Route::get('/etiquetas_Pendientes', EtiquetasPendientes::class) -> name('etiquetasPendientes');
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/dashboard', DashboardAdmin::class)->name('dashboard');
+
+    // Usuarios
+    Route::get('/usuarios', VistausuariosAdmin::class)->middleware('can:ver usuarios')->name('usuarios');
+    Route::get('/usuarios/{id}/edit', ModificarusuariosAdmin::class)-> middleware('can:modificar usuario')-> name ('EditarUsuario');
+    Route::get('/crearusuarios', CrearusuariosAdmin::class)->middleware('can:crear usuario')->name('crearusuarios');
+    // ---------------------------------------------------------------------------------------------------------------------------------
+
+    // Materia prima
+    Route::get('/materiaprima', VistaPrimaAdmin::class)-> middleware('can:ver almacen de materia prima')-> name('materiaprima');
+    Route::get('/registroprima', RegistroPrimaAdmin::class)-> middleware('can:crear materia prima')-> name('registroprima');
+    Route::get('materiaprima/{id}/edit', ModificarPrimaAdmin::class)-> middleware('can:modificar materia prima') -> name('EditarMateriaPrima');
+    // -----------------------------------------------------------------------------------------------------------
+
+    // Entrada de materia prima
+    Route::get('/entradaprima', EntradaPrimaAdmin::class)-> middleware('can:registrar entrada de materia prima') -> name('entradaprima');
+    Route::get('/consultaprima', VistaEntradaPrimaAdmin::class)-> middleware('can:ver historial de entradas de materia prima') -> name('consultaprima');
+    // ------------------------------------------------------------------------------------------
+
+    // Devolucion de materia prima
+    Route::get('/devolucionprima', DevolucionPrimaAdmin::class)-> middleware('can:registrar devolucion de materia prima') -> name('devolucionprima');
+    Route::get('/vistadevolucionprima', VistaDevolucionPrimaAdmin::class)-> middleware('can:ver historial de devoluciones de materia prima') -> name('vistadevolucionprima');
+    // ---------------------------------------------------------------------------------------------------
+
+    // Ajuste de inventario de materia prima
+    Route::get('/ajusteinventario', AjusteInventarioAdmin::class)-> middleware('can:registrar un ajuste de inventario de materia prima') -> name('ajusteinventario');
+    Route::get('/vistaajusteinventario', VistaAjusteInventarioAdmin::class)-> middleware('can:ver ajustes de inventario de materia prima') -> name('vistaajusteinventario');
+    // --------------------------------------------------------------------------------------------------------
+
+    // Asignaciones de material
+    Route::get('/asignaciones', AsignacionesIndex::class)-> middleware('can:ver asignaciones activas')-> name('asignaciones.index');
+    Route::get('/historial-asignaciones', VistaHistorialAsignaciones::class)-> middleware('can:ver historial de asignaciones')-> name('asignaciones.historial');
+    // -------------------------------------------------------------------------------------------------------------------------
+
+    // Cortador
+    Route::get('/vistacortador', VistaCortador::class)-> middleware('can:ver material asignado') -> name('vistacortador');
+    // -----------------------------------------------------------------------------
+
+    // Almacen de producto terminado
+    Route::get('/productoterminado', VistaProductoTerminadoAdmin::class)-> middleware('can:ver producto terminado')-> name('productoterminado');
+    Route::get('/agregarmodelo', AgregarNuevoModeloAdmin::class)-> middleware('can:crear nuevo modelo de producto terminado')-> name('agregarmodelo');
+    Route::get('/productoTerminado/{id}/edit', ModificarModeloAdmin::class)-> middleware('can:modifcar modelo de producto terminado')-> name('modelo.edit');
+
+    // Lotes empaquetados (entradas de producto terminado)
+    Route::get('/historiallotes', HistorialLotesAdmin::class)-> middleware('can:ver lotes en almacen')-> name('historiallotes');
+    Route::get('/agregarlote', AgregarLoteAdmin::class)-> middleware('can:registrar nuevo lote')-> name('agregarlote');
+
+    // Salidas de lotes (salida de producto)
+    Route::get('/historialsalidas', HistorialSalidasAdmin::class)-> middleware('can:ver historial de salidas de producto terminado')-> name('historialsalidas');
+    Route::get('/registrarsalida', RegistrarSalidaAdmin::class)-> middleware('can:registrar nueva salida')-> name('registrarsalida');
+
+    // Etiquetas para imprimir
+    Route::get('/etiquetas_Pendientes', EtiquetasPendientes::class) -> name('etiquetasPendientes');
 });
 
 
-// Ruta para modificar el usuario
-Route::get('/usuarios/{id}/edit', ModificarusuariosAdmin::class) -> name ('EditarUsuario');
 
-// Ruta para modificar la materia prima
-Route::get('materiaprima/{id}/edit', ModificarPrimaAdmin::class) -> name('EditarMateriaPrima');

@@ -25,6 +25,8 @@ class AjusteInventarioAdmin extends Component
 
     public function save(AjusteInventarioServices $service)
     {
+        $this -> authorize('registrar un ajuste de inventario de materia prima');
+
         $this -> form -> validate();
 
         try {

@@ -45,17 +45,21 @@
                             {{-- Botones de acción dentro de la tabla (Azul cielo como en la imagen) --}}
                             <td class="border border-slate-900 p-3 text-center">
                                 <div class="flex items-center justify-center gap-2">
-                                    <button type="button"
-                                        wire:click="$dispatch('abrir-modal-finalizar', { id: {{ $asignacion->id }} })"
-                                        class="rounded-sm border border-slate-900 bg-[#029eff] px-3 py-1.5 text-xs font-bold text-slate-900 transition hover:bg-sky-400">
-                                        Finalizar
-                                    </button>
+                                    @can('terminar asignacion')
+                                        <button type="button"
+                                            wire:click="$dispatch('abrir-modal-finalizar', { id: {{ $asignacion->id }} })"
+                                            class="rounded-sm border border-slate-900 bg-[#029eff] px-3 py-1.5 text-xs font-bold text-slate-900 transition hover:bg-sky-400">
+                                            Finalizar
+                                        </button>
+                                    @endcan
 
-                                    <button type="button"
-                                        wire:click="$dispatch('abrir-modal-adicional', { id: {{ $asignacion->id }} })"
-                                        class="rounded-sm border border-slate-900 bg-[#03efc0] px-3 py-1.5 text-xs font-bold text-slate-900 transition hover:bg-sky-400">
-                                        + Material
-                                    </button>
+                                    @can('registrar material adicional')
+                                        <button type="button"
+                                            wire:click="$dispatch('abrir-modal-adicional', { id: {{ $asignacion->id }} })"
+                                            class="rounded-sm border border-slate-900 bg-[#03efc0] px-3 py-1.5 text-xs font-bold text-slate-900 transition hover:bg-sky-400">
+                                            + Material
+                                        </button>
+                                    @endcan
                             </td>
                         </tr>
                     @empty

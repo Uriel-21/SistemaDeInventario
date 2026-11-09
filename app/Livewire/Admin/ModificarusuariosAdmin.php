@@ -17,13 +17,15 @@ class ModificarusuariosAdmin extends Component
         $this -> service = $service;
     }
 
-     public function mount(int $id): void
+    public function mount(int $id): void
     {
         $this -> form-> cargar($this -> service -> obtenerDatos($id));
     }
 
     public function save()
     {
+        $this -> authorize('modificar usuario');
+
         $datos = $this -> form -> validate();
 
         $this -> service -> modificarUsuario($this -> form -> userId, $datos);

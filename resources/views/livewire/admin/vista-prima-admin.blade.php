@@ -83,11 +83,13 @@
                                         Modificar
                                     </a>
 
-                                    <button type="button" wire:click="desactivar({{ $dato->id }})"
-                                        wire:confirm="¿Estás seguro de que deseas eliminar este registro?"
-                                        class="rounded-md border border-slate-900 bg-[#FF0000] px-3 py-1 text-xs font-bold text-white shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition-all hover:bg-red-600">
-                                        Eliminar
-                                    </button>
+                                    @can('eliminar materia prima')
+                                        <button type="button" wire:click="desactivar({{ $dato->id }})"
+                                            wire:confirm="¿Estás seguro de que deseas eliminar este registro?"
+                                            class="rounded-md border border-slate-900 bg-[#FF0000] px-3 py-1 text-xs font-bold text-white shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition-all hover:bg-red-600">
+                                            Eliminar
+                                        </button>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

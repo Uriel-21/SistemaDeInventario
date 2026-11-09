@@ -14,6 +14,8 @@ class RegistroPrimaAdmin extends Component
 
     public function save(MateriaPrimaService $service)
     {
+        $this -> authorize('crear materia prima');
+
         $this -> form -> validate();
 
         $data = [

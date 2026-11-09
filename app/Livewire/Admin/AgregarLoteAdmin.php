@@ -29,6 +29,8 @@ class AgregarLoteAdmin extends Component
 
     public function save(LotesEmpaquetadosService $service)
     {
+        $this -> authorize('registrar nuevo lote');
+
         try {
 
         $this -> form -> user_id = Auth::id();

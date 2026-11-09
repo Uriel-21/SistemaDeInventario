@@ -14,10 +14,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use ReturnTypeWillChange;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
+    use HasRoles;
 
     /** @use HasFactory<UserFactory> */
     use HasFactory;
@@ -78,7 +80,11 @@ class User extends Authenticatable
         return $query -> where (function ($q) use ($dato) {
             $q -> where ('name', 'LIKE', "%$dato%")
                 -> orWhere('email', 'LIKE', "%$dato%")
-                -> orWhere('telefono', 'LIKE', "%$dato%");
+                -> orWhere('telefono', 'LIKE', "%$dato%")
+                // Buscar por roles tambien
+                ->orWhereHas('roles', function ($qRol) use ($dato) {
+                    $qRol->where('name', 'LIKE'. "%$dato%");
+                });
         });
     }
 

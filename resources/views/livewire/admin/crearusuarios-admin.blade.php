@@ -98,12 +98,15 @@
                         </label>
                         <div class="relative">
                             <!-- Añadí wire:model="rol" preparándolo para cuando lo uses -->
-                            <select id="rol" wire:model="rol"
+                            <select id="rol" wire:model="form.rol"
                                 class="w-full appearance-none rounded-2xl border border-slate-400 bg-white px-4 py-2 pr-10 text-sm text-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.4)] focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600">
                                 <option value="">Selecciona un rol</option>
                                 <option value="Administrador">Administrador</option>
-                                <option value="Almacenista">Almacenista</option>
+                                <option value="Coordinador">Coordinador</option>
                                 <option value="Cortador">Cortador</option>
+                                <option value="Empaquetador">Empaquetador</option>
+                                <option value="Impresion">Impresion</option>
+
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-700">
@@ -113,6 +116,9 @@
                                 </svg>
                             </div>
                         </div>
+                        @error('form.rol')
+                            <span class="text-xs font-bold text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                 </div>

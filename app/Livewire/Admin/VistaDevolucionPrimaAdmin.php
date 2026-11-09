@@ -34,6 +34,8 @@ class VistaDevolucionPrimaAdmin extends Component
 
     public function exportarPdf(DevolucionMateriaPrimaService $service)
     {
+        $this -> authorize('exportar devoluciones de materia prima en pdf');
+
         $devoluciones = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
         $pdf = Pdf::loadView('pdf.reporte-devoluciones', ['devoluciones' => $devoluciones]);
         return response() -> streamDownload(function () use ($pdf) {
@@ -43,6 +45,8 @@ class VistaDevolucionPrimaAdmin extends Component
 
     public function exportarExcel(DevolucionMateriaPrimaService $service)
     {
+        $this -> authorize('exportar devoluciones de materia prima en excel');
+
         $devoluciones = $service->obtenerParaExportar($this->search, $this->filtroTiempo);
 
         return Excel::download(

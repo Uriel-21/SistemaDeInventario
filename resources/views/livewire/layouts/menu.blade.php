@@ -20,50 +20,80 @@
         <h2 class="mb-5 text-xl font-bold text-slate-800">Menú Principal</h2>
 
         <nav class="flex w-full flex-col items-center gap-4">
-            <a href=" {{ route('materiaprima') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Materia prima
-            </a>
-            <a href="{{ route('vistadevolucionprima') }}"
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Devolución de materia prima
-            </a>
-            <a href=" {{ route('consultaprima') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Entradas de Materia prima
-            </a>
-            <a href=" {{ route('vistaajusteinventario') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Ajuste de inventario
-            </a>
-            <a href=" {{ route('asignaciones.index') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Asignaciones
-            </a>
-            <a href=" {{ route('asignaciones.historial') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Historial asignaciones
-            </a>
-            <a href=" {{ route('productoterminado') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Producto Terminado
-            </a>
-            <a href=" {{ route('historiallotes') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Historial de lotes
-            </a>
-            <a href=" {{ route('historialsalidas') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Historial de salidas
-            </a>
+            @can('ver almacen de materia prima')
+                <a href=" {{ route('materiaprima') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Materia prima
+                </a>
+            @endcan
+
+            @can('ver historial de devoluciones de materia prima')
+                <a href="{{ route('vistadevolucionprima') }}"
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Devolución de materia prima
+                </a>
+            @endcan
+
+            @can('ver historial de entradas de materia prima')
+                <a href=" {{ route('consultaprima') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Entradas de Materia prima
+                </a>
+            @endcan
+
+            @can('ver ajustes de inventario de materia prima')
+                <a href=" {{ route('vistaajusteinventario') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Ajuste de inventario
+                </a>
+            @endcan
+
+            @can('ver asignaciones activas')
+                <a href=" {{ route('asignaciones.index') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Asignaciones Activas
+                </a>
+            @endcan
+
+            @can('ver historial de asignaciones')
+                <a href=" {{ route('asignaciones.historial') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Historial asignaciones
+                </a>
+            @endcan
+
+            @can('ver producto terminado')
+                <a href=" {{ route('productoterminado') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Producto Terminado
+                </a>
+            @endcan
+
+            @can('ver lotes en almacen')
+                <a href=" {{ route('historiallotes') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Historial de lotes
+                </a>
+            @endcan
+
+            @can('ver historial de salidas de producto terminado')
+                <a href=" {{ route('historialsalidas') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Historial de salidas
+                </a>
+            @endcan
+
             <a href=" {{ route('etiquetasPendientes') }} "
                 class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Imprimir etiquetas
+                Etiquetas pendientes
             </a>
-            <a href=" {{ route('usuarios') }} "
-                class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                Usuarios
-            </a>
+
+            @can('ver usuarios')
+                <a href=" {{ route('usuarios') }} "
+                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
+                    Usuarios
+                </a>
+            @endcan
         </nav>
     </aside>
 </div>

@@ -25,10 +25,12 @@
                     </div>
 
                     <div class="flex justify-end">
-                        <button type="button" wire:click="imprimir"
-                            class="rounded-md border-2 border-slate-900 bg-[#8BD044] px-5 py-2 text-xs font-bold text-slate-950 shadow-sm transition hover:bg-green-400">
-                            Imprimir pendientes
-                        </button>
+                        @can('imprimir etiquetas pendientes')
+                            <button type="button" wire:click="imprimir"
+                                class="rounded-md border-2 border-slate-900 bg-[#8BD044] px-5 py-2 text-xs font-bold text-slate-950 shadow-sm transition hover:bg-green-400">
+                                Imprimir pendientes
+                            </button>
+                        @endcan
                     </div>
                 </div>
 

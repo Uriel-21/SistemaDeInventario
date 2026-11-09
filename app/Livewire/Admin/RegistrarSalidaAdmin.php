@@ -13,6 +13,8 @@ class RegistrarSalidaAdmin extends Component
 
     public function save(SalidaProductoTerminadoService $service)
     {
+        $this -> authorize('registrar nueva salida');
+
         $this -> form -> user_id = Auth::id();
         $this -> form -> validate();
 
