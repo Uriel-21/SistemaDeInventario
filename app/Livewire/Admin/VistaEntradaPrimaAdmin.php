@@ -34,6 +34,8 @@ class VistaEntradaPrimaAdmin extends Component
 
     public function exportarPdf(EntradaMateriaPrimaService $service)
     {
+        $this -> authorize('exportar entradas de materia prima en pdf');
+
         $entradas = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
         $pdf = Pdf::loadView('pdf.reporte-entradas', ['entradas' => $entradas]);
         return response() -> streamDownload(function () use ($pdf) {
@@ -43,6 +45,8 @@ class VistaEntradaPrimaAdmin extends Component
 
     public function exportarExcel(EntradaMateriaPrimaService $service)
     {
+        $this -> authorize('exportar entradas de materia prima en excel');
+
         $entradas = $service->obtenerParaExportar($this->search, $this->filtroTiempo);
 
         return Excel::download(

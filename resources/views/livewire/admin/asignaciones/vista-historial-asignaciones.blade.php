@@ -120,15 +120,17 @@
 
                 {{-- Acciones --}}
                 <div class="mt-5 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-                    <button type="button" wire:click="exportarPdf"
-                        class="rounded-md border border-slate-900 bg-[#F87171] px-4 py-2 text-xs font-bold text-slate-950 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-red-400 active:translate-y-0.5 flex items-center justify-center min-w-[120px]">
+                    @can('exportar asignaciones a pdf')
+                        <button type="button" wire:click="exportarPdf"
+                            class="rounded-md border border-slate-900 bg-[#F87171] px-4 py-2 text-xs font-bold text-slate-950 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-red-400 active:translate-y-0.5 flex items-center justify-center min-w-[120px]">
 
-                        {{-- Texto normal --}}
-                        <span wire:loading.remove wire:target="exportarPdf">Exportar a PDF</span>
+                            {{-- Texto normal --}}
+                            <span wire:loading.remove wire:target="exportarPdf">Exportar a PDF</span>
 
-                        {{-- Texto mientras procesa --}}
-                        <span wire:loading wire:target="exportarPdf" class="animate-pulse">Generando...</span>
-                    </button>
+                            {{-- Texto mientras procesa --}}
+                            <span wire:loading wire:target="exportarPdf" class="animate-pulse">Generando...</span>
+                        </button>
+                    @endcan
 
                     <a href="{{ route('asignaciones.index') }}" wire:navigate
                         class="rounded-md border border-slate-900 bg-[#F3D06B] px-5 py-2 text-xs font-bold text-slate-950 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-[#FFD600]">

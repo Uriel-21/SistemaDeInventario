@@ -61,6 +61,8 @@ class CrearAsignacion extends Component
 
     public function save(AsignacionesService $service)
     {
+        $this -> authorize('registrar asignacion');
+
         $this -> form -> estado = 'Pendiente';
 
         if ($this->form->dm_iniciales > 0 && $this->form->consumo_estimado > 0) {

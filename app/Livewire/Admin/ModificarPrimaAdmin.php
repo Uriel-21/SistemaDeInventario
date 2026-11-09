@@ -25,6 +25,8 @@ class ModificarPrimaAdmin extends Component
 
     public function save()
     {
+        $this -> authorize('modificar materia prima');
+
         $datos = $this -> form -> validate();
 
         try {

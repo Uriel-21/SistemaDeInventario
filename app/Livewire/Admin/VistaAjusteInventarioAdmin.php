@@ -33,6 +33,8 @@ class VistaAjusteInventarioAdmin extends Component
 
     public function exportarPdf(AjusteInventarioServices $service)
     {
+        $this -> authorize('exportar ajustes de materia prima en pdf');
+
         $ajustes = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
         $pdf = Pdf::loadView('pdf.reporte-ajuste', ['ajustes' => $ajustes]);
         return response() -> streamDownload(function () use ($pdf) {
@@ -42,6 +44,8 @@ class VistaAjusteInventarioAdmin extends Component
 
     public function exportarExcel(AjusteInventarioServices $service)
     {
+        $this -> authorize('exportar ajustes de materia prima en excel');
+
         $ajustes = $service->obtenerParaExportar($this->search, $this->filtroTiempo);
 
         return Excel::download(

@@ -25,6 +25,8 @@ class AgregarNuevoModeloAdmin extends Component
 
     public function save(AlmacenProductoTerminadoService $service)
     {
+        $this -> authorize('crear nuevo modelo de producto terminado');
+
         $this -> form -> validate();
 
         try {

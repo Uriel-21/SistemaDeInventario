@@ -56,10 +56,7 @@
                             <td class="p-2">{{ $usuario->name }}</td>
                             <td class="p-2">{{ $usuario->telefono }}</td>
                             <td class="p-2">{{ $usuario->email }}</td>
-                            <td class="p-2">
-                                <!-- Placeholder del rol por el momento -->
-                                Cortador
-                            </td>
+                            <td class="p-2"> {{ $usuario->roles->first()?->name ?? 'Sin Rol' }} </td>
                             <td class="p-2 sm:p-3 text-center">
                                 <div class="flex items-center justify-center gap-2">
                                     <a href="{{ route('EditarUsuario', $usuario->id) }}"
@@ -68,11 +65,13 @@
                                     </a>
 
                                     <!-- Botón Desactivar conectado al componente -->
-                                    <button type="button" wire:click="desactivar({{ $usuario->id }})"
-                                        wire:confirm="¿Estás seguro de que deseas desactivar a este usuario?"
-                                        class="rounded-md border border-slate-900 bg-[#FF0000] px-3 py-1 text-xs font-bold text-white shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] hover:bg-red-600 transition-all">
-                                        Borrar
-                                    </button>
+                                    @can('eliminar usuario')
+                                        <button type="button" wire:click="desactivar({{ $usuario->id }})"
+                                            wire:confirm="¿Estás seguro de que deseas desactivar a este usuario?"
+                                            class="rounded-md border border-slate-900 bg-[#FF0000] px-3 py-1 text-xs font-bold text-white shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] hover:bg-red-600 transition-all">
+                                            Borrar
+                                        </button>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

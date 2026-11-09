@@ -19,6 +19,8 @@ class VistaPrimaAdmin extends Component
 
     public function desactivar(int $id, MateriaPrimaService $service)
     {
+        $this -> authorize('eliminar materia prima');
+
         try {
 
             $service -> desactivarRegistro($id);

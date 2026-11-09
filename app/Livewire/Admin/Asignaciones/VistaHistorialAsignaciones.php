@@ -31,6 +31,8 @@ class VistaHistorialAsignaciones extends Component
 
     public function exportarPdf(AsignacionesService $service)
     {
+        $this -> authorize('exportar asignaciones a pdf');
+
         $asignaciones = $service -> obtenerParaExportar($this -> search, $this -> filtroTiempo);
         $pdf = Pdf::loadView('pdf.reporte-historial-asignaciones', ['asignaciones' => $asignaciones]);
         return response() -> streamDownload(function () use ($pdf) {

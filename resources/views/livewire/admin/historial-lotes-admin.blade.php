@@ -62,15 +62,20 @@
 
             <div class="mt-6 grid grid-cols-1 items-center gap-4 sm:grid-cols-3">
                 <div class="flex flex-wrap justify-center gap-3 sm:justify-start">
-                    <button type="button" wire:click="exportarPdf"
-                        class="rounded-md border-2 border-slate-900 bg-[#F87171] px-3 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-red-400 sm:text-xs">
-                        Exportar a PDF
-                    </button>
+                    @can('exportar lotes en almacen en pdf')
+                        <button type="button" wire:click="exportarPdf"
+                            class="rounded-md border-2 border-slate-900 bg-[#F87171] px-3 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-red-400 sm:text-xs">
+                            Exportar a PDF
+                        </button>
+                    @endcan
 
-                    <button type="button"
-                        class="rounded-md border-2 border-slate-900 bg-[#8BD044] px-3 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-green-400 sm:text-xs">
-                        Exportar a Excel
-                    </button>
+                    @can('exportar lotes en almacen en excel')
+                        <button type="button"
+                            class="rounded-md border-2 border-slate-900 bg-[#8BD044] px-3 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-green-400 sm:text-xs">
+                            Exportar a Excel
+                        </button>
+                    @endcan
+
                 </div>
 
                 <div class="flex items-center justify-center text-xs text-gray-600">

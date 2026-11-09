@@ -84,12 +84,13 @@
                                             class="rounded-md border border-slate-900 bg-[#8BD044] px-2.5 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-green-400 sm:px-3 sm:text-xs">
                                             Modificar
                                         </a>
-
-                                        <button type="button" wire:click="desactivar({{ $productoTerminado->id }})"
-                                            wire:confirm="¿Estás seguro de que deseas eliminar este registro?"
-                                            class="rounded-md border border-slate-900 bg-[#E34B4B] px-2.5 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-red-400 sm:px-3 sm:text-xs">
-                                            Eliminar
-                                        </button>
+                                        @can('eliminar modelo de producto terminado')
+                                            <button type="button" wire:click="desactivar({{ $productoTerminado->id }})"
+                                                wire:confirm="¿Estás seguro de que deseas eliminar este registro?"
+                                                class="rounded-md border border-slate-900 bg-[#E34B4B] px-2.5 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-red-400 sm:px-3 sm:text-xs">
+                                                Eliminar
+                                            </button>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

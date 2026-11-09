@@ -26,6 +26,8 @@ class ModificarModeloAdmin extends Component
 
     public function save()
     {
+        $this -> authorize('modifcar modelo de producto terminado');
+
         $datos = $this -> form -> validate();
 
         try {

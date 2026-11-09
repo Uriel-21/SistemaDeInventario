@@ -15,13 +15,15 @@ class UserForm extends Form
     public string $email = '';
     public string $telefono = '';
     public string $password = '';
+    public string $rol = '';
 
     public function cargar(array $datos) : void
     {
-        $this->userId = $datos['id'];
-        $this->name = $datos['name'];
-        $this->email = $datos['email'];
-        $this->telefono = $datos['telefono'];
+        $this->userId = $datos['id'] ?? '';
+        $this->name = $datos['name'] ?? '';
+        $this->email = $datos['email'] ?? '';
+        $this->telefono = $datos['telefono'] ?? '';
+        $this->rol = $datos['rol'] ?? '';
     }
 
     public function rules() : array
@@ -33,7 +35,9 @@ class UserForm extends Form
                 'required', 'email', 'max:255',
                 Rule::unique('users', 'email')->ignore($this->userId),
             ],
-            'password'   => ['nullable', 'string', 'min:8']
+            'password'   => ['nullable', 'string', 'min:8'],
+            'rol' => ['required', 'string',
+            Rule::in(['Administrador', 'Coordinador', 'Cortador', 'Empaquetador', 'Impresion'])],
         ];
     }
 }

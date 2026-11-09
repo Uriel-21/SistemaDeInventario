@@ -20,6 +20,8 @@ class VistausuariosAdmin extends Component
 
     public function desactivar(int $id, UserService $service)
     {
+        $this -> authorize('eliminar usuario');
+
         try {
 
             $service -> desactivarUsuario($id);

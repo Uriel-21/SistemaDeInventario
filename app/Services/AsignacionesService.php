@@ -14,7 +14,7 @@ class AsignacionesService
     public function buscarSeleccionarCortador(string $filtro)
     {
         return User::query()
-            // ->role ('cortador')
+            ->role ('Cortador')
             ->when($filtro, function ($query, $filtro) {
                 $query -> porDato($filtro);
             })

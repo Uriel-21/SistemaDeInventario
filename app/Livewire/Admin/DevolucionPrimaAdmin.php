@@ -28,6 +28,8 @@ class DevolucionPrimaAdmin extends Component
 
     public function save(DevolucionMateriaPrimaService $service)
     {
+        $this -> authorize('registrar devolucion de materia prima');
+
         $this -> form -> validate();
 
         try {

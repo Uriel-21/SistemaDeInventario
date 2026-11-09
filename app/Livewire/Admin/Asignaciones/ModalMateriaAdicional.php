@@ -24,6 +24,8 @@ class ModalMateriaAdicional extends Component
 
     public function save(AsignacionesService $service)
     {
+        $this -> authorize('registrar material adicional');
+
         $stock_disponible = $this -> asignacion -> materiaPrima -> stock_real_dm ?? 0;
 
         $this -> validate([

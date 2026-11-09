@@ -21,6 +21,8 @@ class VistaProductoTerminadoAdmin extends Component
 
     public function desactivar(int $id, AlmacenProductoTerminadoService $service)
     {
+        $this -> authorize('eliminar modelo de producto terminado');
+
         try {
 
             $service -> desactivarRegistro($id);

@@ -29,6 +29,8 @@ class EntradaPrimaAdmin extends Component
 
     public function save(EntradaMateriaPrimaService $service)
     {
+        $this -> authorize('registrar entrada de materia prima');
+
         $this -> form -> validate();
 
         try {
