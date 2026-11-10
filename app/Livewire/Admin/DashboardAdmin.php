@@ -17,6 +17,10 @@ class DashboardAdmin extends Component
         if($user -> hasRole('Impresion')) {
             return redirect() -> route('etiquetasPendientes');
         }
+
+        if($user -> hasRole('Empaquetador')) {
+            return redirect() -> route('historiallotes');
+        }
     }
 
     public function render()
