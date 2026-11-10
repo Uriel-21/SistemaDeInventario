@@ -8,7 +8,7 @@ class DashboardAdmin extends Component
 {
     public function mount()
     {
-        $user = auth() -> user();
+        $user = auth()->user();
 
         if($user -> hasRole('Cortador')) {
             return redirect() -> route('vistacortador');
