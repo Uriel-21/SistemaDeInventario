@@ -15,7 +15,9 @@
             &times;
         </button>
 
-        <img src="{{ asset('Images/Guantes.png') }}" alt="Logo" class="mb-2 mt-6 h-20 max-w-full object-contain">
+        <a href="{{ route('dashboard') }}" class="mb-2 mt-6 transition-transform hover:scale-105">
+            <img src="{{ asset('Images/Guantes.png') }}" alt="Logo" class="h-20 max-w-full object-contain">
+        </a>
 
         <h2 class="mb-5 text-xl font-bold text-slate-800">Menú Principal</h2>
 
