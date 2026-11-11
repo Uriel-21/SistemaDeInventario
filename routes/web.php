@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\AgregarLoteAdmin;
 use App\Livewire\Admin\AgregarNuevoModeloAdmin;
+use App\Livewire\Admin\AjusteDeInventarioProductoTerminadoAdmin;
 use App\Livewire\Admin\AjusteInventarioAdmin;
 use App\Livewire\Admin\CrearusuariosAdmin;
 use App\Livewire\Admin\DashboardAdmin;
@@ -31,6 +32,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Asignaciones\AsignacionesIndex;
 use App\Livewire\Admin\Asignaciones\VistaHistorialAsignaciones;
 use App\Livewire\Admin\EtiquetasPendientes;
+use App\Livewire\Admin\HistorialAjustesDeInventarioProductoTerminadoAdmin;
+use App\Livewire\Forms\AjusteDeInventarioProductoTerminado;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -91,6 +94,10 @@ Route::middleware([
     // Salidas de lotes (salida de producto)
     Route::get('/historialsalidas', HistorialSalidasAdmin::class)-> middleware('can:ver historial de salidas de producto terminado')-> name('historialsalidas');
     Route::get('/registrarsalida', RegistrarSalidaAdmin::class)-> middleware('can:registrar nueva salida')-> name('registrarsalida');
+
+    // Ajuste de inventario de producto terminado
+    Route::get('/ajusteInventarioProductoTerminado', AjusteDeInventarioProductoTerminadoAdmin::class)->middleware('can:registrar ajuste de producto terminado') -> name('productoTerminado.ajuste');
+    Route::get('/historialDeAjustesInventarioProductoTerminado', HistorialAjustesDeInventarioProductoTerminadoAdmin::class) -> middleware('can:ver historial de ajustes de producto terminado') -> name('historialAjusteProductoTerminado.show');
 
     // Etiquetas para imprimir
     Route::get('/etiquetas_Pendientes', EtiquetasPendientes::class) -> name('etiquetasPendientes');

@@ -23,14 +23,23 @@ class AlmacenProductosTerminados extends Model
     {
         $dato = trim((string) $dato);
 
-        return $query->when($dato !== '', function (Builder $q) use ($dato) {
-            $like = '%' . addcslashes($dato, '%_\\') . '%';
+        if ($dato === '') {
+            return $query;
+        }
 
-            $q->where(function(Builder $sub) use ($like) {
-                $sub->where('codigo', 'LIKE', $like)
-                    ->orWhere('nombre_modelo', 'LIKE', $like)
-                    ->orWhere('talla', 'LIKE', $like);
-            });
+        $palabras = array_filter(explode(' ', $dato));
+
+        return $query->where(function (Builder $q) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $like = '%' . addcslashes($palabra, '%_\\') . '%';
+
+                // Cada palabra debe existir en al menos una de las columnas
+                $q->where(function (Builder $sub) use ($like) {
+                    $sub->where('codigo', 'LIKE', $like)
+                        ->orWhere('nombre_modelo', 'LIKE', $like)
+                        ->orWhere('talla', 'LIKE', $like);
+                });
+            }
         });
     }
 

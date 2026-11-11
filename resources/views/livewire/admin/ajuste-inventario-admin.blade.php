@@ -147,10 +147,10 @@
                         Subir al sistema
                     </button>
 
-                    <button type=" {{ route('vistaajusteinventario') }} "
-                        class="rounded-lg border border-red-800 bg-[#FF0000] px-8 py-3 font-bold text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-red-600 active:translate-y-0.5">
+                    <a href="{{ route('vistaajusteinventario') }}" wire:navigate
+                        class="inline-flex items-center justify-center rounded-lg border border-red-800 bg-[#FF0000] px-8 py-3 font-bold text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-red-600 active:translate-y-0.5">
                         Cancelar
-                    </button>
+                    </a>
                 </div>
                 <hr>
             </form>

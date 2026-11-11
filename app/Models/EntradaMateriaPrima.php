@@ -33,28 +33,33 @@ class EntradaMateriaPrima extends Model
         return $this -> belongsTo(User::class);
     }
 
-    public function scopePorDato(Builder $query, ?string $dato) : Builder
+    public function scopePorDato(Builder $query, ?string $dato): Builder
     {
         $dato = trim((string) $dato);
 
-        return $query->when($dato !== '', function (Builder $q) use ($dato) {
-            $like = '%' . addcslashes($dato, '%_\\') . '%';
+        if ($dato === '') {
+            return $query;
+        }
 
-            $q->where(function(Builder $sub) use ($like) {
-                // Búsqueda directa en la misma tabla
-                $sub->where('proveedor', 'LIKE', $like)
-                    ->orWhere('created_at', 'LIKE', $like)
+        $palabras = array_filter(explode(' ', $dato));
 
-                    // Busqueda por la tabla de material
-                    ->orWhereHas('materiaPrima', function (Builder $qMaterial) use ($like) {
-                        $qMaterial->where('nombre', 'LIKE', $like);
-                    })
+        return $query->where(function (Builder $q) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $like = '%' . addcslashes($palabra, '%_\\') . '%';
 
-                    // Buscar registros mediante la tabla de usuarios
-                    ->orWhereHas('user', function (Builder $qUser) use ($like) {
-                        $qUser->where('name', 'LIKE', $like);
-                    });
-            });
+                $q->where(function (Builder $sub) use ($like) {
+                    $sub->where('proveedor', 'LIKE', $like)
+                        ->orWhere('created_at', 'LIKE', $like)
+
+                        ->orWhereHas('materiaPrima', function (Builder $qMaterial) use ($like) {
+                            $qMaterial->where('nombre', 'LIKE', $like);
+                        })
+
+                        ->orWhereHas('user', function (Builder $qUser) use ($like) {
+                            $qUser->where('name', 'LIKE', $like);
+                        });
+                });
+            }
         });
     }
 }

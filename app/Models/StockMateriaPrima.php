@@ -18,17 +18,25 @@ class StockMateriaPrima extends Model
         'ubicacion',
     ];
 
-    public function scopePorDato(Builder $query, ?string $dato) : Builder
+    public function scopePorDato(Builder $query, ?string $dato): Builder
     {
         $dato = trim((string) $dato);
 
-        return $query -> when($dato !== '', function (Builder $q) use ($dato) {
-            $like = '%' . addcslashes($dato, '%_\\') . '%';
+        if ($dato === '') {
+            return $query;
+        }
 
-            $q -> where(function(Builder $sub) use ($like) {
-                $sub -> where('folio', 'LIKE', $like)
+        $palabras = array_filter(explode(' ', $dato));
+
+        return $query->where(function (Builder $q) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $like = '%' . addcslashes($palabra, '%_\\') . '%';
+
+                $q->where(function (Builder $sub) use ($like) {
+                    $sub->where('folio', 'LIKE', $like)
                         ->orWhere('nombre', 'LIKE', $like);
-            });
+                });
+            }
         });
     }
 
