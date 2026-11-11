@@ -8,28 +8,9 @@
         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
         x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="translate-x-0"
         x-transition:leave-end="translate-x-full" style="display: none;" :aria-hidden="(!openMenu).toString()"
-        class="fixed right-0 top-0 z-30 flex h-dvh w-80 max-w-[90vw] flex-col items-center overflow-y-auto rounded-l-2xl border-l-2 border-amber-900 bg-white px-6 py-8 shadow-2xl">
-        <!-- Botón de Cerrar -->
-        <button type="button" @click="openMenu = false" aria-label="Cerrar menú"
-            class="absolute right-4 top-4 rounded-lg px-3 py-1 text-2xl leading-none hover:bg-amber-100">
-            &times;
-        </button>
+        class="fixed right-0 top-0 z-50 flex h-dvh w-84 max-w-[90vw] flex-col overflow-y-auto rounded-l-2xl border-l-2 border-amber-900 bg-white px-5 py-6 shadow-2xl">
 
-        <a href="{{ route('dashboard') }}" class="mb-2 mt-6 transition-transform hover:scale-105">
-            <img src="{{ asset('Images/Guantes.png') }}" alt="Logo" class="h-20 max-w-full object-contain">
-        </a>
-
-        <h2 class="mb-5 text-xl font-bold text-slate-800">Menú Principal</h2>
-
-        <nav class="flex w-full flex-col items-center gap-4">
-            @can('ver almacen de materia prima')
-                <a href=" {{ route('materiaprima') }} "
-                    class="w-36 rounded-xl bg-[#FFD000] px-4 py-2 text-center font-medium hover:bg-amber-400">
-                    Materia prima
-                </a>
-            @endcan
-
-        <!-- Botón de Cerrar y Encabezado -->
+        <!-- Botón de Cerrar y Encabezado con Logo Clickeable -->
         <div class="relative mb-5 flex flex-col items-center border-b border-gray-200 pb-4">
             <button type="button" @click="openMenu = false" aria-label="Cerrar menú"
                 class="absolute right-0 top-0 rounded-lg p-1.5 text-slate-700 transition hover:bg-amber-100 hover:text-slate-950 active:scale-95">
@@ -38,7 +19,12 @@
                 </svg>
             </button>
 
-            <img src="{{ asset('Images/Guantes.png') }}" alt="Logo" class="mt-1 h-16 object-contain">
+            <!-- Logo clickeable apuntando al Dashboard -->
+            <a href="{{ route('dashboard') }}" wire:navigate
+                class="mt-1 inline-block transition-transform hover:scale-105 active:scale-95">
+                <img src="{{ asset('Images/Guantes.png') }}" alt="Logo Mena Tapia" class="h-16 object-contain">
+            </a>
+
             <h2 class="mt-2 text-base font-bold text-slate-900 uppercase tracking-wider">Menú Principal</h2>
         </div>
 
@@ -60,7 +46,7 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         @can('ver almacen de materia prima')
-                            <a href="{{ route('materiaprima') }}"
+                            <a href="{{ route('materiaprima') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-[#FFD000] px-3.5 py-2 text-sm font-semibold text-slate-950 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-400 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Almacén Prima</span>
                                 <span class="text-xs">➔</span>
@@ -68,7 +54,7 @@
                         @endcan
 
                         @can('ver historial de entradas de materia prima')
-                            <a href="{{ route('consultaprima') }}"
+                            <a href="{{ route('consultaprima') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Entradas</span>
                                 <span class="text-xs">➔</span>
@@ -76,7 +62,7 @@
                         @endcan
 
                         @can('ver historial de devoluciones de materia prima')
-                            <a href="{{ route('vistadevolucionprima') }}"
+                            <a href="{{ route('vistadevolucionprima') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Devoluciones</span>
                                 <span class="text-xs">➔</span>
@@ -84,7 +70,7 @@
                         @endcan
 
                         @can('ver ajustes de inventario de materia prima')
-                            <a href="{{ route('vistaajusteinventario') }}"
+                            <a href="{{ route('vistaajusteinventario') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Ajustes de Inventario</span>
                                 <span class="text-xs">➔</span>
@@ -106,7 +92,7 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         @can('ver asignaciones activas')
-                            <a href="{{ route('asignaciones.index') }}"
+                            <a href="{{ route('asignaciones.index') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-[#FFD000] px-3.5 py-2 text-sm font-semibold text-slate-950 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-400 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Asignaciones Activas</span>
                                 <span class="text-xs">➔</span>
@@ -114,7 +100,7 @@
                         @endcan
 
                         @can('ver historial de asignaciones')
-                            <a href="{{ route('asignaciones.historial') }}"
+                            <a href="{{ route('asignaciones.historial') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Historial Asignaciones</span>
                                 <span class="text-xs">➔</span>
@@ -139,7 +125,7 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         @can('ver producto terminado')
-                            <a href="{{ route('productoterminado') }}"
+                            <a href="{{ route('productoterminado') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-[#FFD000] px-3.5 py-2 text-sm font-semibold text-slate-950 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-400 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Almacén Terminado</span>
                                 <span class="text-xs">➔</span>
@@ -147,7 +133,7 @@
                         @endcan
 
                         @can('ver lotes en almacen')
-                            <a href="{{ route('historiallotes') }}"
+                            <a href="{{ route('historiallotes') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Historial de Lotes</span>
                                 <span class="text-xs">➔</span>
@@ -155,7 +141,7 @@
                         @endcan
 
                         @can('ver historial de salidas de producto terminado')
-                            <a href="{{ route('historialsalidas') }}"
+                            <a href="{{ route('historialsalidas') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Historial de Salidas</span>
                                 <span class="text-xs">➔</span>
@@ -163,14 +149,14 @@
                         @endcan
 
                         @can('ver historial de ajustes de producto terminado')
-                            <a href="{{ route('historialAjusteProductoTerminado.show') }}"
+                            <a href="{{ route('historialAjusteProductoTerminado.show') }}" wire:navigate
                                 class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                                 <span>Ajustes Terminado</span>
                                 <span class="text-xs">➔</span>
                             </a>
                         @endcan
 
-                        <a href="{{ route('etiquetasPendientes') }}"
+                        <a href="{{ route('etiquetasPendientes') }}" wire:navigate
                             class="flex items-center justify-between rounded-xl border border-slate-900 bg-amber-50 px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-amber-200 hover:translate-x-0.5 active:translate-y-0.5">
                             <span>Etiquetas Pendientes</span>
                             <span class="text-xs">➔</span>
@@ -190,7 +176,7 @@
                         <span>Administración</span>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <a href="{{ route('usuarios') }}"
+                        <a href="{{ route('usuarios') }}" wire:navigate
                             class="flex items-center justify-between rounded-xl border border-slate-900 bg-sky-300 px-3.5 py-2 text-sm font-semibold text-slate-950 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.85)] transition hover:bg-sky-400 hover:translate-x-0.5 active:translate-y-0.5">
                             <span>Gestión de Usuarios</span>
                             <span class="text-xs">➔</span>
