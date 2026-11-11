@@ -1,5 +1,5 @@
 <div>
-    <div x-data="{ modalDetalles: false }" @abrir-modal-detalles.window="modalDetalles = true">
+    <div x-data="{ modalDetalles: false }" @abrir-modal-detalles-producto-terminado.window="modalDetalles = true">
         <div x-show="modalDetalles" x-transition.opacity style="display: none;"
             class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4 font-['Raleway']"
             role="dialog" aria-modal="true" aria-labelledby="modal-title" @click.self="modalDetalles = false">

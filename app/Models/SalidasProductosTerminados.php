@@ -35,22 +35,28 @@ class SalidasProductosTerminados extends Model
     {
         $dato = trim((string) $dato);
 
-        return $query->when($dato !== '', function (Builder $q) use ($dato) {
-            $like = '%' . addcslashes($dato, '%_\\') . '%';
+        if ($dato === '') {
+            return $query;
+        }
 
-            $q->where(function(Builder $sub) use ($like) {
+        $palabras = array_filter(explode(' ', $dato));
 
-                $sub->where('cliente', 'LIKE', $like)
+        return $query->where(function (Builder $q) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $like = '%' . addcslashes($palabra, '%_\\') . '%';
 
-                    ->orWhereHas('producto', function(Builder $relacion) use ($like) {
-                        $relacion->where('codigo', 'LIKE', $like)
-                                ->orWhere('nombre_modelo', 'LIKE', $like)
-                                ->orWhere('talla', 'LIKE', $like);
-                    })
-                    ->orWhereHas('lote', function(Builder $relacion) use ($like) {
-                        $relacion->where('codigo_barras', 'LIKE', $like);
-                    });
+                $q->where(function (Builder $sub) use ($like) {
+                    $sub->where('cliente', 'LIKE', $like)
+                        ->orWhereHas('producto', function (Builder $relacion) use ($like) {
+                            $relacion->where('codigo', 'LIKE', $like)
+                                    ->orWhere('nombre_modelo', 'LIKE', $like)
+                                    ->orWhere('talla', 'LIKE', $like);
+                        })
+                        ->orWhereHas('lote', function (Builder $relacion) use ($like) {
+                            $relacion->where('codigo_barras', 'LIKE', $like);
+                        });
                 });
-            });
+            }
+        });
     }
 }

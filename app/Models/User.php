@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use ReturnTypeWillChange;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -75,16 +76,30 @@ class User extends Authenticatable
         ];
     }
     // Funcion para obtener usuarios por algun dato
-    public function scopePorDato($query, $dato)
+    public function scopePorDato(Builder $query, ?string $dato): Builder
     {
-        return $query -> where (function ($q) use ($dato) {
-            $q -> where ('name', 'LIKE', "%$dato%")
-                -> orWhere('email', 'LIKE', "%$dato%")
-                -> orWhere('telefono', 'LIKE', "%$dato%")
-                // Buscar por roles tambien
-                ->orWhereHas('roles', function ($qRol) use ($dato) {
-                    $qRol->where('name', 'LIKE'. "%$dato%");
+        $dato = trim((string) $dato);
+
+        if ($dato === '') {
+            return $query;
+        }
+
+        $palabras = array_filter(explode(' ', $dato));
+
+        return $query->where(function (Builder $q) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $like = '%' . addcslashes($palabra, '%_\\') . '%';
+
+                $q->where(function (Builder $sub) use ($like) {
+                    $sub->where('name', 'LIKE', $like)
+                        ->orWhere('email', 'LIKE', $like)
+                        ->orWhere('telefono', 'LIKE', $like)
+
+                        ->orWhereHas('roles', function (Builder $qRol) use ($like) {
+                            $qRol->where('name', 'LIKE', $like);
+                        });
                 });
+            }
         });
     }
 
@@ -122,5 +137,10 @@ class User extends Authenticatable
     public function salidasProductos() : HasMany
     {
         return $this -> hasMany(SalidasProductosTerminados::class);
+    }
+
+    public function ajusteAlmacen() : HasMany
+    {
+        return $this -> hasMany(AjusteInventarioProductoTerminado::class);
     }
 }

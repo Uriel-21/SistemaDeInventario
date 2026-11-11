@@ -62,7 +62,14 @@
                         @forelse ($salidas as $salida)
                             <tr class="divide-x divide-gray-400 align-top transition hover:bg-gray-200">
                                 <td class="p-2 text-center">{{ $salida->user->name ?? 'N/A' }}</td>
-                                <td class="p-2 text-center">{{ $salida->producto->nombre_modelo ?? 'N/A' }}</td>
+                                <td class="p-2 text-center">
+                                    <div class="font-bold text-slate-900">
+                                        {{ $salida->producto->nombre_modelo ?? 'N/A' }}
+                                    </div>
+                                    <div class="text-xs text-slate-500 font-mono">
+                                        Talla: {{ $salida->producto->talla ?? 'S/T' }}
+                                    </div>
+                                </td>
                                 <td class="p-2 text-center">{{ $salida->lote->codigo_barras ?? 'N/A' }}</td>
                                 <td class="p-2 text-center">{{ $salida->cliente }}</td>
                             </tr>

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Builder;
 class AsignacionesMaterial extends Model
 {
     protected $fillable = [
@@ -30,15 +30,29 @@ class AsignacionesMaterial extends Model
         return $this -> belongsTo(StockMateriaPrima::class, 'stock_material_id')->withTrashed();
     }
 
-    public function scopePorDato($query, $busqueda)
+    public function scopePorDato(Builder $query, ?string $busqueda): Builder
     {
-        return $query->where(function ($q) use ($busqueda) {
-            $q->whereHas('user', function ($qUser) use ($busqueda) {
-                $qUser->where('name', 'like', '%' . $busqueda . '%');
-            })
-            ->orWhereHas('materiaPrima', function ($qMaterial) use ($busqueda) {
-                $qMaterial->where('nombre', 'like', '%' . $busqueda . '%');
-            });
+        $busqueda = trim((string) $busqueda);
+
+        if ($busqueda === '') {
+            return $query;
+        }
+
+        $palabras = array_filter(explode(' ', $busqueda));
+
+        return $query->where(function (Builder $q) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $like = '%' . addcslashes($palabra, '%_\\') . '%';
+
+                $q->where(function (Builder $sub) use ($like) {
+                    $sub->whereHas('user', function (Builder $qUser) use ($like) {
+                        $qUser->where('name', 'like', $like);
+                    })
+                    ->orWhereHas('materiaPrima', function (Builder $qMaterial) use ($like) {
+                        $qMaterial->where('nombre', 'like', $like);
+                    });
+                });
+            }
         });
     }
 
