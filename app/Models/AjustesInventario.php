@@ -26,13 +26,29 @@ class AjustesInventario extends Model
         return $this -> belongsTo(User::class, 'user_id');
     }
 
-    public function scopePorDato($query, $busqueda)
+    public function scopePorDato(Builder $query, ?string $busqueda): Builder
     {
-        return $query->where(function ($q) use ($busqueda) {
-            $q->where('motivo', 'like', '%' . $busqueda . '%')
-            ->orWhereHas('materiaPrima', function ($qMaterial) use ($busqueda) {
-                $qMaterial->where('nombre', 'like', '%' . $busqueda . '%');
-            });
+        $busqueda = trim((string) $busqueda);
+
+        if ($busqueda === '') {
+            return $query;
+        }
+
+        // Tokenizar la búsqueda en palabras independientes
+        $palabras = array_filter(explode(' ', $busqueda));
+
+        return $query->where(function (Builder $q) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $like = '%' . addcslashes($palabra, '%_\\') . '%';
+
+                // Cada palabra debe coincidir en el motivo o en la materia prima
+                $q->where(function (Builder $sub) use ($like) {
+                    $sub->where('motivo', 'like', $like)
+                        ->orWhereHas('materiaPrima', function (Builder $qMaterial) use ($like) {
+                            $qMaterial->where('nombre', 'like', $like);
+                        });
+                });
+            }
         });
     }
 

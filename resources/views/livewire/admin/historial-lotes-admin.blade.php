@@ -33,6 +33,7 @@
                         <tr
                             class="divide-x divide-gray-400 border-b border-gray-500 bg-gray-200 text-center text-xs text-slate-800 sm:text-sm">
                             <th class="px-2 py-2 font-medium">Código de modelo</th>
+                            <th class="px-2 py-2 font-medium">Código de baras</th>
                             <th class="px-2 py-2 font-medium">Nombre de modelo</th>
                             <th class="px-2 py-2 font-medium">Talla</th>
                             <th class="px-2 py-2 font-medium">Cantidad (Lote)</th>
@@ -45,13 +46,14 @@
                                 class="divide-x divide-gray-400 bg-gray-100 text-sm text-slate-900 transition hover:bg-gray-200">
                                 {{-- Extraemos los datos de la relación producto --}}
                                 <td class="p-2">{{ $lote->productos->codigo ?? 'N/D' }}</td>
+                                <td class="p-2">{{ $lote->codigo_barras ?? 'N/D' }}</td>
                                 <td class="p-2">{{ $lote->productos->nombre_modelo ?? 'N/D' }}</td>
                                 <td class="p-2">{{ $lote->productos->talla ?? 'N/D' }}</td>
                                 <td class="p-2 text-center">{{ $lote->cantidad }}</td>
                             </tr>
                         @empty
                             <tr class="divide-x divide-gray-400 bg-gray-100">
-                                <td colspan="4" class="p-4 text-center text-sm text-slate-600 font-medium">
+                                <td colspan="5" class="p-4 text-center text-sm text-slate-600 font-medium">
                                     No se encontraron lotes registrados.
                                 </td>
                             </tr>

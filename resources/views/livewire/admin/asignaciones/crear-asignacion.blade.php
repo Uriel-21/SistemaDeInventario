@@ -227,7 +227,7 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm text-gray-800 mb-1"> Gasto por corte (dm):</label>
+                            <label class="block text-sm text-gray-800 mb-1"> Gasto por tarea (25 piezas) (dm):</label>
                             <input type="number" step="0.01" wire:model.live="form.consumo_estimado"
                                 class="w-48 rounded-md border border-slate-900 bg-gray-100 px-3 py-1 text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-amber-500">
                         </div>
@@ -236,7 +236,7 @@
                     <div class="flex-1">
                         <div
                             class="h-full min-h-[140px] rounded-md border border-slate-900 bg-[#EFEFEF] flex flex-col items-center justify-center p-4">
-                            <span class="text-sm text-gray-800 mb-4">Piezas estimadas</span>
+                            <span class="text-sm text-gray-800 mb-4">Tareas estimadas</span>
 
                             <span class="text-5xl font-light text-slate-800">
                                 @if ($form->dm_iniciales && $form->consumo_estimado && $form->consumo_estimado > 0)
