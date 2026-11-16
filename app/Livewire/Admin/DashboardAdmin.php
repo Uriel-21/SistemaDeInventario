@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
+use App\Services\DashboardService;
 
 class DashboardAdmin extends Component
 {
@@ -23,8 +24,18 @@ class DashboardAdmin extends Component
         }
     }
 
-    public function render()
+    public function render(DashboardService $service)
     {
-        return view('livewire.admin.dashboard-admin')->layout('layouts.app');
+        $totalPiezas = $service -> obtenerTotalDePiezas();
+        $modelosActivos = $service -> obtenerModelosActivos();
+        $cortesDelDia = $service -> obtenerCortesDelDia();
+        $tallasMasSolicitadas = $service -> obtenerTallasMasSolicitadas();
+
+        return view('livewire.admin.dashboard-admin', [
+            'totalPiezas' => $totalPiezas,
+            'modelosActivos' => $modelosActivos,
+            'cortesDelDia' => $cortesDelDia,
+            'tallasMasSolicitadas'=> $tallasMasSolicitadas,
+            ])->layout('layouts.app');
     }
 }
