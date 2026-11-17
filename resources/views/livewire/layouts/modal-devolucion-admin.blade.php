@@ -43,7 +43,7 @@
                                 <label class="text-sm font-medium text-slate-800 sm:text-right">Observaciones</label>
                                 <textarea readonly
                                     class="w-full rounded-lg border border-slate-900 bg-gray-100 px-3 py-2 text-sm text-slate-800 resize-none cursor-not-allowed"
-                                    rows="2">{{ $detalle->observaciones ?: 'Sin observaciones' }}</textarea>
+                                    rows="2">{{ $detalle->motivo ?: 'Sin observaciones' }}</textarea>
                             </div>
 
                             <div class="grid grid-cols-1 items-start gap-2 sm:grid-cols-[8rem_1fr] sm:gap-4">
