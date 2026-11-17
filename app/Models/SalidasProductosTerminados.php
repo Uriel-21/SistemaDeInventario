@@ -18,12 +18,12 @@ class SalidasProductosTerminados extends Model
 
     public function producto() : BelongsTo
     {
-        return $this -> belongsTo(AlmacenProductosTerminados::class, 'producto_id');
+        return $this -> belongsTo(AlmacenProductosTerminados::class, 'producto_id') -> withTrashed();
     }
 
     public function user() : BelongsTo
     {
-        return $this -> belongsTo(User::class, 'user_id');
+        return $this -> belongsTo(User::class, 'user_id') -> withTrashed();
     }
 
     public function lote() : BelongsTo

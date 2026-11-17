@@ -50,6 +50,6 @@ class AlmacenProductosTerminados extends Model
 
     public function salidasProductos() : HasMany
     {
-        return $this -> hasMany(SalidasProductosTerminados::class);
+        return $this -> hasMany(SalidasProductosTerminados::class, 'producto_id');
     }
 }
