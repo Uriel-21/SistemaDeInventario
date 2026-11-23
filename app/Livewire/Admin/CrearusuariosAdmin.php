@@ -9,18 +9,8 @@ use App\Livewire\Forms\UserForm;
 class CrearusuariosAdmin extends Component
 {
     public UserForm $form;
-    public $password = '';
+    public ?string $urlActivacion = null;
 
-    public function mount(UserService $service)
-    {
-        $this -> password = $service -> generarPassword();
-    }
-
-    // Se puede quitar si no se necesita
-    public function generarNuevaPassword(UserService $servicio)
-    {
-        $this->password = $servicio->generarPassword();
-    }
 
     public function save(UserService $service)
     {
@@ -32,18 +22,16 @@ class CrearusuariosAdmin extends Component
             'name' => $this -> form -> name,
             'email' => $this -> form -> email,
             'telefono' => $this -> form -> telefono,
-            'password' => $this -> password,
             'rol' => $this -> form -> rol
         ];
 
         try {
 
-            $service -> guardarUsuario($data);
+            $this -> urlActivacion = $service -> registrarConInvitacion($data);
 
-            session() -> flash('mensaje', 'Usuario registrado con éxito. Contraseña: ' . $this -> password);
+            session() -> flash('mensaje', 'Usuario registrado con éxito.');
 
             $this -> form -> reset();
-            $this -> password = $service -> generarPassword();
 
         } catch (\Exception $e) {
             session()->flash('error', 'Hubo un problema al guardar el usuario en la base de datos.');

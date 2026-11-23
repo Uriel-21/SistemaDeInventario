@@ -17,6 +17,7 @@ use ReturnTypeWillChange;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Builder;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens;
