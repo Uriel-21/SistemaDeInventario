@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloquear acceso directo a archivos ocultos (.env, .git, etc.)
+    RewriteRule ^\. - [F,L]
+
+    # Redirigir todo el tráfico hacia la carpeta public/ de Laravel
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
+</IfModule>

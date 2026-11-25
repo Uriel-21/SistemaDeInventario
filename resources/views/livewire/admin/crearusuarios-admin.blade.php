@@ -74,7 +74,7 @@
                         @enderror
                     </div>
 
-                    <!-- Contraseña provisional -->
+                    {{-- <!-- Contraseña provisional -->
                     <div class="space-y-1.5 md:col-span-1">
                         <label for="password" class="block text-sm font-bold text-slate-800">
                             Contraseña provisional:
@@ -89,7 +89,7 @@
                                 ↻
                             </button>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Rol -->
                     <div class="space-y-1.5 md:col-span-1">

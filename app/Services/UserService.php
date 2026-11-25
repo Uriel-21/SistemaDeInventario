@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Exception;
 use Illuminate\Testing\Fluent\Concerns\Has;
+use Illuminate\Support\Facades\Password;
+use App\Notifications\InvitacionUsuarioNotificacion;
+use Illuminate\Support\Facades\DB;
 
 class UserService
 {
@@ -27,11 +30,14 @@ class UserService
     public function guardarUsuario(array $datos)
     {
         try {
+
+            $passwordTemporal = $datos['password'] ?? $this -> generarPassword();
+
                 $usuario = User::create([
                     'name' => $datos['name'],
                     'email' => $datos['email'],
-                    'password' => Hash::make($datos['password']),
-                    'telefono' => $datos['telefono']
+                    'password' => Hash::make($passwordTemporal),
+                    'telefono' => $datos['telefono'] ?? null
             ]);
 
             // Asignar el rol
@@ -45,6 +51,21 @@ class UserService
             Log::error('Error al registrar el usuario: ' . $e->getMessage());
             throw $e;
         }
+    }
+
+    // Funcion que va a coordinar a las demas para registrar el usuario y mandar la invitacion
+    public function registrarConInvitacion(array $datos)
+    {
+        return DB::transaction(function () use ($datos) {
+            $usuario = $this -> guardarUsuario($datos);
+            $url = $this -> generarUrlActivacion($usuario);
+
+            DB::afterCommit(function () use ($usuario, $url) {
+                $usuario -> notify(new InvitacionUsuarioNotificacion($url));
+            });
+
+            return $url;
+        });
     }
 
     // Funcion que devuelve un arreglo para la edicion de usuarios
@@ -115,12 +136,23 @@ class UserService
     // Función para generar un password aleatorio
     public function generarPassword()
     {
-        return Str::random(8);
+        return Str::random(32);
     }
 
     // Funcion para obtener el usuario por medio del ID
     public function obtenerUsuarioPorId(int $id)
     {
         return User::findOrFail($id);
+    }
+
+    // Funcion para generar la URL de activacion
+    public function generarUrlActivacion(User $user)
+    {
+        $token = Password::createToken($user);
+
+        return url(route('password.reset', [
+            'token' => $token,
+            'email' => $user->email,
+        ], false));
     }
 }
