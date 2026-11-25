@@ -71,13 +71,6 @@
                         </button>
                     @endcan
 
-                    @can('exportar lotes en almacen en excel')
-                        <button type="button"
-                            class="rounded-md border-2 border-slate-900 bg-[#8BD044] px-3 py-1.5 text-[10px] font-medium text-slate-950 shadow-sm transition hover:bg-green-400 sm:text-xs">
-                            Exportar a Excel
-                        </button>
-                    @endcan
-
                 </div>
 
                 <div class="flex items-center justify-center text-xs text-gray-600">

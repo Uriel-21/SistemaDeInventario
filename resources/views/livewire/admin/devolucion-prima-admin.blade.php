@@ -126,7 +126,8 @@
                     </div>
 
                     {{-- Columna derecha --}}
-                    <div class="space-y-4">
+
+                    <div class="space-y-4" x-data="{ previews: [] }">
                         <div>
                             <label for="evidencia" class="mb-1 block text-sm font-medium text-slate-800">
                                 Evidencia / Foto
@@ -147,24 +148,28 @@
                             </label>
 
                             <input type="file" id="evidencia" wire:model="form.foto_path" accept="image/*" multiple
-                                class="sr-only">
+                                class="sr-only"
+                                x-on:change="
+                previews.forEach(url => URL.revokeObjectURL(url));
+                previews = Array.from($event.target.files).map(file => URL.createObjectURL(file));
+            ">
 
                             <div wire:loading wire:target="form.foto_path"
                                 class="mt-2 text-sm text-amber-600 font-semibold">
                                 Cargando imágenes...
                             </div>
 
-                            {{-- Vista previa de las imágenes seleccionadas --}}
-                            @if ($form->foto_path && is_array($form->foto_path))
+                            {{-- Vista previa instantánea desde el navegador --}}
+                            <template x-if="previews.length > 0">
                                 <div class="mt-4 grid grid-cols-3 gap-3">
-                                    @foreach ($form->foto_path as $index => $foto)
+                                    <template x-for="(src, index) in previews" :key="index">
                                         <div class="relative group">
-                                            <img src="{{ $foto->temporaryUrl() }}"
+                                            <img :src="src"
                                                 class="h-24 w-full object-cover rounded-md border border-gray-300 shadow-sm">
                                         </div>
-                                    @endforeach
+                                    </template>
                                 </div>
-                            @endif
+                            </template>
                         </div>
 
                         <div>
