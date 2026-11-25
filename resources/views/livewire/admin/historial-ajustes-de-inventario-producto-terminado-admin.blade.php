@@ -125,18 +125,6 @@
                             </button>
                         @endcan
 
-                        @can('exportar ajustes de producto terminado en excel')
-                            <button type="button" wire:click="exportarExcel"
-                                class="rounded-md border border-slate-900 bg-[#8BD044] px-4 py-2 text-xs font-bold text-slate-950 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-green-400 active:translate-y-0.5 flex items-center justify-center min-w-[120px]">
-
-                                {{-- Texto normal --}}
-                                <span wire:loading.remove wire:target="exportarExcel">Exportar a Excel</span>
-
-                                {{-- Texto mientras procesa --}}
-                                <span wire:loading wire:target="exportarExcel" class="animate-pulse">Generando...</span>
-                            </button>
-                        @endcan
-
                         <a href="{{ route('productoTerminado.ajuste') }}" wire:navigate
                             class="inline-flex items-center justify-center rounded-md border border-slate-900 bg-[#FFD600] px-4 py-2 text-xs font-bold text-slate-950 shadow-[1px_1px_0px_0px_rgba(0,0,0,0.7)] transition hover:bg-amber-400 active:translate-y-0.5">
                             <svg class="mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
